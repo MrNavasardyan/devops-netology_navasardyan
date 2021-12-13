@@ -75,7 +75,7 @@ Hello from PyCharm
 ### 8c928e835 main: Consult local directories as potential mirrors of providers
 
 # 6.Найдите все коммиты в которых была изменена функция globalPluginDirs.
-### it log -L :'func globalPluginDirs':plugins.go --oneline 
+### git log -L :'func globalPluginDirs':plugins.go --oneline 
 
 # 7.Кто автор функции synchronizedWriters?
 ###  git log -S'func synchronizedWriters' --pretty=format:'%h - %an %ae'
