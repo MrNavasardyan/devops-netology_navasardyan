@@ -24,6 +24,7 @@ Hello from PyCharm
 ###  0196a0c2aefea6b85f495b0bbe32a855021f0a24 Changed Required: false to Optional: true in the ### SNS topic schema
 
 # 2.Какому тегу соответствует коммит 85024d3?
+### git show 85024d3
 ### commit 85024d3100126de36331c6982bfaac02cdab9e76 (tag: v0.12.23)
 ### Author: tf-release-bot <terraform@hashicorp.com>
 ### Date:   Thu Mar 5 20:56:10 2020 +0000
