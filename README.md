@@ -44,12 +44,8 @@
    
    **Ответ:**
    	```
-   	vagrant@vagrant:~$ cat file3.txt 9&2 2>&1 1>&9 |grep file
-	[1] 1213
+   	vagrant@vagrant:~$ cat file3.txt 5>&2 2>&1 1>&5 |grep file
 	cat: file3.txt: No such file or directory
-	cat: 9: No such file or directory
-	-bash: 9: Bad file descriptor
-	[1]+  Exit 1                  cat file3.txt 9
 	```
 
 9.  Что выведет команда `cat /proc/$$/environ`? Как еще можно получить аналогичный по содержанию вывод?
