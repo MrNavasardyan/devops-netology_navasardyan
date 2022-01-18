@@ -43,12 +43,14 @@
 8. Получится ли в качестве входного потока для pipe использовать только stderr команды, не потеряв при этом отображение stdout на pty? Напоминаем: по умолчанию через pipe передается только stdout команды слева от `|` на stdin команды справа.
    
    **Ответ:**
-   ```vagrant@vagrant:~$ cat file3.txt 9&2 2>&1 1>&9 |grep file
+   	```
+   	vagrant@vagrant:~$ cat file3.txt 9&2 2>&1 1>&9 |grep file
 	[1] 1213
 	cat: file3.txt: No such file or directory
 	cat: 9: No such file or directory
 	-bash: 9: Bad file descriptor
-	[1]+  Exit 1                  cat file3.txt 9```
+	[1]+  Exit 1                  cat file3.txt 9
+	```
 
 9.  Что выведет команда `cat /proc/$$/environ`? Как еще можно получить аналогичный по содержанию вывод?
     
