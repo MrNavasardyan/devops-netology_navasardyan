@@ -30,7 +30,7 @@
    **Ответ:**
    ***При попытке вывести данные в tty получаю ошибку:***
    `sudo echo Hello netology pts0 to tty0 >/dev/tty0`
-   ***Но при попытке вывести из tty в pty, команда проходит:
+   ***Но при попытке вывести из tty в pty, команда проходит:***
    `vagrant@vagrant:~$ echo hello Netology from tty1 to pts0
     hello Netology from tty1 to pts0`
 
