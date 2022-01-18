@@ -30,13 +30,8 @@
    **Ответ:**
    ***При попытке вывести данные в tty получаю ошибку:***
    	```
-	vagrant@vagrant:~$ sudo echo Hello netology pts0 to tty0 >/dev/tty0
+	vagrant@vagrant:~$ sudo echo Hello netology >/dev/tty0
 	-bash: /dev/tty0: Permission denied
-	```
-	***Но при попытке вывести из tty в pty, команда проходит:***
- 	```
-   	vagrant@vagrant:~$ echo hello Netology from tty1 to pts0
-    	hello Netology from tty1 to pts0
 	```
 
 7. Выполните команду `bash 5>&1`. К чему она приведет? Что будет, если вы выполните `echo netology > /proc/$$/fd/5`? Почему так происходит?
