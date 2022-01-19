@@ -86,7 +86,7 @@
 
    **Ответ:**
 
-   ***Часть информации из структуры utsname может быть получена через /proc/sys/kernel/ {ostype, hostname, osrelease, version, domainname}.***
+   ***Альтернативное расположение /proc/sys/kernel/ {ostype, hostname, osrelease, version, domainname}.***
    
    ```
    vagrant@vagrant:~$ strace uname
