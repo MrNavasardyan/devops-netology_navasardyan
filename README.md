@@ -56,6 +56,7 @@
     /usr/sbin/opensnoop-bpfcc
     ```
     На какие файлы вы увидели вызовы группы `open` за первую секунду работы утилиты? Воспользуйтесь пакетом `bpfcc-tools` для Ubuntu 20.04. Дополнительные [сведения по установке](https://github.com/iovisor/bcc/blob/master/INSTALL.md).
+    
     **Ответ:**
     ```
     vagrant@vagrant:~$ sudo opensnoop-bpfcc
