@@ -109,15 +109,196 @@
 		
 	</details>
    	
-   	curl http://localhost:9100/metrics | grep "memory_"
+   	```curl http://localhost:9100/metrics | grep "memory_"```
+	<details> 
+		<summary>Вывод:</summary>
+		  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+		  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0# HELP node_memory_Active_anon_bytes Memory information field Active_anon_bytes.
+		# TYPE node_memory_Active_anon_bytes gauge
+		node_memory_Active_anon_bytes 1.17628928e+08
+		# HELP node_memory_Active_bytes Memory information field Active_bytes.
+		# TYPE node_memory_Active_bytes gauge
+		node_memory_Active_bytes 1.7977344e+08
+		# HELP node_memory_Active_file_bytes Memory information field Active_file_bytes.
+		# TYPE node_memory_Active_file_bytes gauge
+		node_memory_Active_file_bytes 6.2144512e+07
+		# HELP node_memory_AnonHugePages_bytes Memory information field AnonHugePages_bytes.
+		# TYPE node_memory_AnonHugePages_bytes gauge
+		node_memory_AnonHugePages_bytes 0
+		# HELP node_memory_AnonPages_bytes Memory information field AnonPages_bytes.
+		# TYPE node_memory_AnonPages_bytes gauge
+		node_memory_AnonPages_bytes 2.13389312e+08
+		# HELP node_memory_Bounce_bytes Memory information field Bounce_bytes.
+		# TYPE node_memory_Bounce_bytes gauge
+		node_memory_Bounce_bytes 0
+		# HELP node_memory_Buffers_bytes Memory information field Buffers_bytes.
+		# TYPE node_memory_Buffers_bytes gauge
+		node_memory_Buffers_bytes 1.3258752e+07
+		# HELP node_memory_Cached_bytes Memory information field Cached_bytes.
+		# TYPE node_memory_Cached_bytes gauge
+		node_memory_Cached_bytes 1.25681664e+08
+		# HELP node_memory_CmaFree_bytes Memory information field CmaFree_bytes.
+		# TYPE node_memory_CmaFree_bytes gauge
+		node_memory_CmaFree_bytes 0
+		# HELP node_memory_CmaTotal_bytes Memory information field CmaTotal_bytes.
+		# TYPE node_memory_CmaTotal_bytes gauge
+		node_memory_CmaTotal_bytes 0
+		# HELP node_memory_CommitLimit_bytes Memory information field CommitLimit_bytes.
+		# TYPE node_memory_CommitLimit_bytes gauge
+		node_memory_CommitLimit_bytes 1.541947392e+09
+		# HELP node_memory_Committed_AS_bytes Memory information field Committed_AS_bytes.
+		# TYPE node_memory_Committed_AS_bytes gauge
+		node_memory_Committed_AS_bytes 7.26880256e+08
+		# HELP node_memory_DirectMap2M_bytes Memory information field DirectMap2M_bytes.
+		# TYPE node_memory_DirectMap2M_bytes gauge
+		node_memory_DirectMap2M_bytes 9.60495616e+08
+		# HELP node_memory_DirectMap4k_bytes Memory information field DirectMap4k_bytes.
+		# TYPE node_memory_DirectMap4k_bytes gauge
+		node_memory_DirectMap4k_bytes 1.13180672e+08
+		# HELP node_memory_Dirty_bytes Memory information field Dirty_bytes.
+		# TYPE node_memory_Dirty_bytes gauge
+		node_memory_Dirty_bytes 20480
+		# HELP node_memory_FileHugePages_bytes Memory information field FileHugePages_bytes.
+		# TYPE node_memory_FileHugePages_bytes gauge
+		node_memory_FileHugePages_bytes 0
+		# HELP node_memory_FilePmdMapped_bytes Memory information field FilePmdMapped_bytes.
+		# TYPE node_memory_FilePmdMapped_bytes gauge
+		node_memory_FilePmdMapped_bytes 0
+		# HELP node_memory_HardwareCorrupted_bytes Memory information field HardwareCorrupted_bytes.
+		# TYPE node_memory_HardwareCorrupted_bytes gauge
+		node_memory_HardwareCorrupted_bytes 0
+		# HELP node_memory_HugePages_Free Memory information field HugePages_Free.
+		# TYPE node_memory_HugePages_Free gauge
+		node_memory_HugePages_Free 0
+		# HELP node_memory_HugePages_Rsvd Memory information field HugePages_Rsvd.
+		# TYPE node_memory_HugePages_Rsvd gauge
+		node_memory_HugePages_Rsvd 0
+		# HELP node_memory_HugePages_Surp Memory information field HugePages_Surp.
+		# TYPE node_memory_HugePages_Surp gauge
+		node_memory_HugePages_Surp 0
+		# HELP node_memory_HugePages_Total Memory information field HugePages_Total.
+		# TYPE node_memory_HugePages_Total gauge
+		node_memory_HugePages_Total 0
+		# HELP node_memory_Hugepagesize_bytes Memory information field Hugepagesize_bytes.
+		# TYPE node_memory_Hugepagesize_bytes gauge
+		node_memory_Hugepagesize_bytes 2.097152e+06
+		# HELP node_memory_Hugetlb_bytes Memory information field Hugetlb_bytes.
+		# TYPE node_memory_Hugetlb_bytes gauge
+		node_memory_Hugetlb_bytes 0
+		# HELP node_memory_Inactive_anon_bytes Memory information field Inactive_anon_bytes.
+		# TYPE node_memory_Inactive_anon_bytes gauge
+		node_memory_Inactive_anon_bytes 9.1119616e+07
+		# HELP node_memory_Inactive_bytes Memory information field Inactive_bytes.
+		# TYPE node_memory_Inactive_bytes gauge
+		node_memory_Inactive_bytes 1.59219712e+08
+		# HELP node_memory_Inactive_file_bytes Memory information field Inactive_file_bytes.
+		# TYPE node_memory_Inactive_file_bytes gauge
+		node_memory_Inactive_file_bytes 6.8100096e+07
+		# HELP node_memory_KReclaimable_bytes Memory information field KReclaimable_bytes.
+		# TYPE node_memory_KReclaimable_bytes gauge
+		node_memory_KReclaimable_bytes 3.0961664e+07
+		# HELP node_memory_KernelStack_bytes Memory information field KernelStack_bytes.
+		# TYPE node_memory_KernelStack_bytes gauge
+		node_memory_KernelStack_bytes 2.658304e+06
+		# HELP node_memory_Mapped_bytes Memory information field Mapped_bytes.
+		# TYPE node_memory_Mapped_bytes gauge
+		node_memory_Mapped_bytes 4.9934336e+07
+		# HELP node_memory_MemAvailable_bytes Memory information field MemAvailable_bytes.
+		# TYPE node_memory_MemAvailable_bytes gauge
+		node_memory_MemAvailable_bytes 5.8462208e+08
+		# HELP node_memory_MemFree_bytes Memory information field MemFree_bytes.
+		# TYPE node_memory_MemFree_bytes gauge
+		node_memory_MemFree_bytes 5.69344e+08
+		# HELP node_memory_MemTotal_bytes Memory information field MemTotal_bytes.
+		# TYPE node_memory_MemTotal_bytes gauge
+		node_memory_MemTotal_bytes 1.028694016e+09
+		# HELP node_memory_Mlocked_bytes Memory information field Mlocked_bytes.
+		# TYPE node_memory_Mlocked_bytes gauge
+		node_memory_Mlocked_bytes 1.8972672e+07
+		# HELP node_memory_NFS_Unstable_bytes Memory information field NFS_Unstable_bytes.
+		# TYPE node_memory_NFS_Unstable_bytes gauge
+		node_memory_NFS_Unstable_bytes 0
+		# HELP node_memory_PageTables_bytes Memory information field PageTables_bytes.
+		# TYPE node_memory_PageTables_bytes gauge
+		node_memory_PageTables_bytes 2.564096e+06
+		# HELP node_memory_Percpu_bytes Memory information field Percpu_bytes.
+		# TYPE node_memory_Percpu_bytes gauge
+		node_memory_Percpu_bytes 1.531904e+06
+		# HELP node_memory_SReclaimable_bytes Memory information field SReclaimable_bytes.
+		# TYPE node_memory_SReclaimable_bytes gauge
+		node_memory_SReclaimable_bytes 3.0961664e+07
+		# HELP node_memory_SUnreclaim_bytes Memory information field SUnreclaim_bytes.
+		# TYPE node_memory_SUnreclaim_bytes gauge
+		node_memory_SUnreclaim_bytes 4.9250304e+07
+		# HELP node_memory_ShmemHugePages_bytes Memory information field ShmemHugePages_bytes.
+		# TYPE node_memory_ShmemHugePages_bytes gauge
+		node_memory_ShmemHugePages_bytes 0
+		# HELP node_memory_ShmemPmdMapped_bytes Memory information field ShmemPmdMapped_bytes.
+		# TYPE node_memory_ShmemPmdMapped_bytes gauge
+		node_memory_ShmemPmdMapped_bytes 0
+		# HELP node_memory_Shmem_bytes Memory information field Shmem_bytes.
+		# TYPE node_memory_Shmem_bytes gauge
+		node_memory_Shmem_bytes 303104
+		# HELP node_memory_Slab_bytes Memory information field Slab_bytes.
+		# TYPE node_memory_Slab_bytes gauge
+		node_memory_Slab_bytes 8.0211968e+07
+		# HELP node_memory_SwapCached_bytes Memory information field SwapCached_bytes.
+		# TYPE node_memory_SwapCached_bytes gauge
+		node_memory_SwapCached_bytes 7.098368e+06
+		# HELP node_memory_SwapFree_bytes Memory information field SwapFree_bytes.
+		# TYPE node_memory_SwapFree_bytes gauge
+		node_memory_SwapFree_bytes 9.91162368e+08
+		# HELP node_memory_SwapTotal_bytes Memory information field SwapTotal_bytes.
+		# TYPE node_memory_SwapTotal_bytes gauge
+		node_memory_SwapTotal_bytes 1.027600384e+09
+		# HELP node_memory_Unevictable_bytes Memory information field Unevictable_bytes.
+		# TYPE node_memory_Unevictable_bytes gauge
+		node_memory_Unevictable_bytes 1.8972672e+07
+		# HELP node_memory_VmallocChunk_bytes Memory information field VmallocChunk_bytes.
+		# TYPE node_memory_VmallocChunk_bytes gauge
+		node_memory_VmallocChunk_bytes 0
+		# HELP node_memory_VmallocTotal_bytes Memory information field VmallocTotal_bytes.
+		# TYPE node_memory_VmallocTotal_bytes gauge
+		node_memory_VmallocTotal_bytes 3.5184372087808e+13
+		# HELP node_memory_VmallocUsed_bytes Memory information field VmallocUsed_bytes.
+		# TYPE node_memory_VmallocUsed_bytes gauge
+		node_memory_VmallocUsed_bytes 1.0166272e+07
+		# HELP node_memory_WritebackTmp_bytes Memory information field WritebackTmp_bytes.
+		# TYPE node_memory_WritebackTmp_bytes gauge
+		node_memory_WritebackTmp_bytes 0
+		# HELP node_memory_Writeback_bytes Memory information field Writeback_bytes.
+		# TYPE node_memory_Writeback_bytes gauge
+		node_memory_Writeback_bytes 0
+		# HELP node_pressure_memory_stalled_seconds_total Total time in seconds no process could make progress due to memory congestion
+		# TYPE node_pressure_memory_stalled_seconds_total counter
+		node_pressure_memory_stalled_seconds_total 0.434042
+		# HELP node_pressure_memory_waiting_seconds_total Total time in seconds that processes have waited for memory
+		# TYPE node_pressure_memory_waiting_seconds_total counter
+		node_pressure_memory_waiting_seconds_total 2.681051
+		100 61430    0 61430    0     0  9998k      0 --:--:-- --:--:-- --:--:-- 9998k
+		# HELP process_resident_memory_bytes Resident memory size in bytes.
+		# TYPE process_resident_memory_bytes gauge
+		process_resident_memory_bytes 1.6248832e+07
+		# HELP process_virtual_memory_bytes Virtual memory size in bytes.
+		# TYPE process_virtual_memory_bytes gauge
+		process_virtual_memory_bytes 7.34851072e+08
+		# HELP process_virtual_memory_max_bytes Maximum amount of virtual memory available in bytes.
+		# TYPE process_virtual_memory_max_bytes gauge
+		process_virtual_memory_max_bytes 1.8446744073709552e+19
+	
+	</details>
 	
 	
-   	root@vagrant:~/node_exporter-1.3.1.linux-amd64# curl http://localhost:9100/metrics | grep "hdd_"
+   	```root@vagrant:~/node_exporter-1.3.1.linux-amd64# curl http://localhost:9100/metrics | grep "hdd_"```
+	
+	<details><summary>Вывод:</summary>
+	
  	 % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 	100 61464    0 61464    0     0   9.7M      0 --:--:-- --:--:-- --:--:-- 11.7M
-   ```
-   
+	</details>
+      
 
 3. Установите в свою виртуальную машину [Netdata](https://github.com/netdata/netdata). Воспользуйтесь [готовыми пакетами](https://packagecloud.io/netdata/netdata/install) для установки (`sudo apt install -y netdata`). После успешной установки:
     * в конфигурационном файле `/etc/netdata/netdata.conf` в секции [web] замените значение с localhost на `bind to = 0.0.0.0`,
