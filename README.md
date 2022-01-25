@@ -7,14 +7,114 @@
     * удостоверьтесь, что с помощью systemctl процесс корректно стартует, завершается, а после перезагрузки автоматически поднимается.
   
     **Ответ**
+    ```
+    root@vagrant:~/node_exporter-1.3.1.linux-amd64# systemctl status node_exporter
+	● node_exporter.service - Prometheus Node Exporter
+     Loaded: loaded (/etc/systemd/system/node_exporter.service; enabled; vendor preset: enabled)
+     Active: active (running) since Tue 2022-01-25 09:09:51 UTC; 14s ago
+     Main PID: 22084 (node_exporter)
+     Tasks: 4 (limit: 1071)
+     Memory: 2.4M
+     CGroup: /system.slice/node_exporter.service
+             └─22084 /usr/local/bin/node_exporter
 
+	Jan 25 09:09:51 vagrant node_exporter[22084]: ts=2022-01-25T09:09:51.911Z caller=node_exporter.go:115 level=info collector=thermal_zone
+	Jan 25 09:09:51 vagrant node_exporter[22084]: ts=2022-01-25T09:09:51.911Z caller=node_exporter.go:115 level=info collector=time
+	Jan 25 09:09:51 vagrant node_exporter[22084]: ts=2022-01-25T09:09:51.911Z caller=node_exporter.go:115 level=info collector=timex
+	Jan 25 09:09:51 vagrant node_exporter[22084]: ts=2022-01-25T09:09:51.911Z caller=node_exporter.go:115 level=info collector=udp_queues
+	Jan 25 09:09:51 vagrant node_exporter[22084]: ts=2022-01-25T09:09:51.911Z caller=node_exporter.go:115 level=info collector=uname
+	Jan 25 09:09:51 vagrant node_exporter[22084]: ts=2022-01-25T09:09:51.911Z caller=node_exporter.go:115 level=info collector=vmstat
+	Jan 25 09:09:51 vagrant node_exporter[22084]: ts=2022-01-25T09:09:51.911Z caller=node_exporter.go:115 level=info collector=xfs
+	Jan 25 09:09:51 vagrant node_exporter[22084]: ts=2022-01-25T09:09:51.911Z caller=node_exporter.go:115 level=info collector=zfs
+	Jan 25 09:09:51 vagrant node_exporter[22084]: ts=2022-01-25T09:09:51.911Z caller=node_exporter.go:199 level=info msg="Listening on" address=:9100
+	Jan 25 09:09:51 vagrant node_exporter[22084]: ts=2022-01-25T09:09:51.911Z caller=tls_config.go:195 level=info msg="TLS is disabled." http2=false
+	
+	root@vagrant:~/node_exporter-1.3.1.linux-amd64# systemctl stop node_exporter
+	root@vagrant:~/node_exporter-1.3.1.linux-amd64# systemctl status node_exporter
+	● node_exporter.service - Prometheus Node Exporter
+     Loaded: loaded (/etc/systemd/system/node_exporter.service; enabled; vendor preset: enabled)
+     Active: inactive (dead) since Tue 2022-01-25 09:12:33 UTC; 4s ago
+    Process: 22084 ExecStart=/usr/local/bin/node_exporter (code=killed, signal=TERM)
+    Main PID: 22084 (code=killed, signal=TERM)
 
+	Jan 25 09:09:51 vagrant node_exporter[22084]: ts=2022-01-25T09:09:51.911Z caller=node_exporter.go:115 level=info collector=udp_queues
+	Jan 25 09:09:51 vagrant node_exporter[22084]: ts=2022-01-25T09:09:51.911Z caller=node_exporter.go:115 level=info collector=uname
+	Jan 25 09:09:51 vagrant node_exporter[22084]: ts=2022-01-25T09:09:51.911Z caller=node_exporter.go:115 level=info collector=vmstat
+	Jan 25 09:09:51 vagrant node_exporter[22084]: ts=2022-01-25T09:09:51.911Z caller=node_exporter.go:115 level=info collector=xfs
+	Jan 25 09:09:51 vagrant node_exporter[22084]: ts=2022-01-25T09:09:51.911Z caller=node_exporter.go:115 level=info collector=zfs
+	Jan 25 09:09:51 vagrant node_exporter[22084]: ts=2022-01-25T09:09:51.911Z caller=node_exporter.go:199 level=info msg="Listening on" address=:9100
+	Jan 25 09:09:51 vagrant node_exporter[22084]: ts=2022-01-25T09:09:51.911Z caller=tls_config.go:195 level=info msg="TLS is disabled." http2=false
+	Jan 25 09:12:33 vagrant systemd[1]: Stopping Prometheus Node Exporter...
+	Jan 25 09:12:33 vagrant systemd[1]: node_exporter.service: Succeeded.
+	Jan 25 09:12:33 vagrant systemd[1]: Stopped Prometheus Node Exporter.
+	
+	root@vagrant:~/node_exporter-1.3.1.linux-amd64# systemctl start node_exporter.service
+	root@vagrant:~/node_exporter-1.3.1.linux-amd64# systemctl status node_exporter
+	● node_exporter.service - Prometheus Node Exporter
+     	Loaded: loaded (/etc/systemd/system/node_exporter.service; enabled; vendor preset: enabled)
+     	Active: active (running) since Tue 2022-01-25 09:13:37 UTC; 3s ago
+  	 Main PID: 22147 (node_exporter)
+     	 Tasks: 4 (limit: 1071)
+     	Memory: 2.4M
+     	CGroup: /system.slice/node_exporter.service
+             └─22147 /usr/local/bin/node_exporter
+	
+	
 2. Ознакомьтесь с опциями node_exporter и выводом /metrics по-умолчанию. Приведите несколько опций, которые вы бы выбрали для базового мониторинга хоста по CPU, памяти, диску и сети.
    
    **Ответ:**
-   <img src="https://i.ibb.co/jJ0R53k/2022-01-24-205411.png">
-
-   Метрики 
+   ```  curl http://localhost:9100/metrics | grep "cpu_"
+   	<details><summary>Вывод:</summary>
+		  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+					 Dload  Upload   Total   Spent    Left  Speed
+		  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0# HELP go_memstats_gc_cpu_fraction The fraction of this program's available CPU time used 	by the GC since the program started.
+		# TYPE go_memstats_gc_cpu_fraction gauge
+		go_memstats_gc_cpu_fraction 4.149665287238637e-06
+		# HELP node_cpu_guest_seconds_total Seconds the CPUs spent in guests (VMs) for each mode.
+		# TYPE node_cpu_guest_seconds_total counter
+		node_cpu_guest_seconds_total{cpu="0",mode="nice"} 0
+		node_cpu_guest_seconds_total{cpu="0",mode="user"} 0
+		node_cpu_guest_seconds_total{cpu="1",mode="nice"} 0
+		node_cpu_guest_seconds_total{cpu="1",mode="user"} 0
+		# HELP node_cpu_seconds_total Seconds the CPUs spent in each mode.
+		# TYPE node_cpu_seconds_total counter
+		node_cpu_seconds_total{cpu="0",mode="idle"} 23925
+		node_cpu_seconds_total{cpu="0",mode="iowait"} 2.27
+		node_cpu_seconds_total{cpu="0",mode="irq"} 0
+		node_cpu_seconds_total{cpu="0",mode="nice"} 0.01
+		node_cpu_seconds_total{cpu="0",mode="softirq"} 0.74
+		node_cpu_seconds_total{cpu="0",mode="steal"} 0
+		node_cpu_seconds_total{cpu="0",mode="system"} 46.96
+		node_cpu_seconds_total{cpu="0",mode="user"} 34.35
+		node_cpu_seconds_total{cpu="1",mode="idle"} 23904.57
+		node_cpu_seconds_total{cpu="1",mode="iowait"} 2.18
+		node_cpu_seconds_total{cpu="1",mode="irq"} 0
+		node_cpu_seconds_total{cpu="1",mode="nice"} 0
+		node_cpu_seconds_total{cpu="1",mode="softirq"} 1.63
+		node_cpu_seconds_total{cpu="1",mode="steal"} 0
+		node_cpu_seconds_total{cpu="1",mode="system"} 48.48
+		node_cpu_seconds_total{cpu="1",mode="user"} 32.54
+		# HELP node_memory_Percpu_bytes Memory information field Percpu_bytes.
+		# TYPE node_memory_Percpu_bytes gauge
+		node_memory_Percpu_bytes 1.531904e+06
+		# HELP node_pressure_cpu_waiting_seconds_total Total time in seconds that processes have waited for CPU time
+		# TYPE node_pressure_cpu_waiting_seconds_total counter
+		node_pressure_cpu_waiting_seconds_total 48.724306
+		1# HELP process_cpu_seconds_total Total user and system CPU time spent in seconds.
+		# TYPE process_cpu_seconds_total counter
+		process_cpu_seconds_total 0.06
+		00 61447    0 61447    0     0  7500k      0 --:--:-- --:--:-- --:--:-- 7500k
+	</details>
+   	
+   	curl http://localhost:9100/metrics | grep "memory_"
+	
+	
+   	root@vagrant:~/node_exporter-1.3.1.linux-amd64# curl http://localhost:9100/metrics | grep "hdd_"
+ 	 % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+	100 61464    0 61464    0     0   9.7M      0 --:--:-- --:--:-- --:--:-- 11.7M
+   ```
+   
 
 3. Установите в свою виртуальную машину [Netdata](https://github.com/netdata/netdata). Воспользуйтесь [готовыми пакетами](https://packagecloud.io/netdata/netdata/install) для установки (`sudo apt install -y netdata`). После успешной установки:
     * в конфигурационном файле `/etc/netdata/netdata.conf` в секции [web] замените значение с localhost на `bind to = 0.0.0.0`,
@@ -76,7 +176,8 @@
     **Ответ:**
     ***fork-бомба, функция, которая параллельно запускает два своих экземпляра. Каждый запускает ещё по два и т.д. 
 	При отсутствии лимита на число процессов машина быстро исчерпывает физическую память и уходит в своп.***
-
+	
+	`[20066.596248] cgroup: fork rejected by pids controller in /user.slice/user-1000.slice/session-9.scope`
 
 
 
