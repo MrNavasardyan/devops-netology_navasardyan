@@ -6,7 +6,7 @@
     * предусмотрите возможность добавления опций к запускаемому процессу через внешний файл (посмотрите, например, на `systemctl cat cron`),
     * удостоверьтесь, что с помощью systemctl процесс корректно стартует, завершается, а после перезагрузки автоматически поднимается.
   
-    **Ответ**
+    **Ответ:**
     ```
     root@vagrant:~/node_exporter-1.3.1.linux-amd64# systemctl status node_exporter
 	● node_exporter.service - Prometheus Node Exporter
