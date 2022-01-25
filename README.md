@@ -64,10 +64,12 @@
    
    **Ответ:**
    ```  curl http://localhost:9100/metrics | grep "cpu_"
-   	<details><summary>Вывод:</summary>
+   
+   	<details> 
+		<summary>Вывод:</summary>
 		  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
 					 Dload  Upload   Total   Spent    Left  Speed
-		  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0# HELP go_memstats_gc_cpu_fraction The fraction of this program's available CPU time used 	by the GC since the program started.
+		  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0# HELP go_memstats_gc_cpu_fraction The fraction of this program's available CPU 			time used 	by the GC since the program started.
 		# TYPE go_memstats_gc_cpu_fraction gauge
 		go_memstats_gc_cpu_fraction 4.149665287238637e-06
 		# HELP node_cpu_guest_seconds_total Seconds the CPUs spent in guests (VMs) for each mode.
@@ -104,6 +106,7 @@
 		# TYPE process_cpu_seconds_total counter
 		process_cpu_seconds_total 0.06
 		00 61447    0 61447    0     0  7500k      0 --:--:-- --:--:-- --:--:-- 7500k
+		
 	</details>
    	
    	curl http://localhost:9100/metrics | grep "memory_"
