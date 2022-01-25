@@ -314,7 +314,9 @@
     **Ответ:**
     ***NetData успешно установлен, порт 19999 проброшен на хостовую машину, web-интерфейс NetData по адресу localhost:19999 доступен***
 
-    ```
+    
+    <details><summary>Вывод:</summary>
+    
     vagrant@vagrant:~$ sudo lsof -i :19999
     COMMAND PID    USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
     netdata 706 netdata    4u  IPv4  23391      0t0  TCP *:19999 (LISTEN)
@@ -324,8 +326,12 @@
     netdata 706 netdata   51u  IPv4  28417      0t0  TCP vagrant:19999->_gateway:64275 (ESTABLISHED)
     netdata 706 netdata   52u  IPv4  28419      0t0  TCP vagrant:19999->_gateway:64276 (ESTABLISHED)
     netdata 706 netdata   53u  IPv4  28420      0t0  TCP vagrant:19999->_gateway:64277 (ESTABLISHED)
-    ```
+    
     <img src="https://cdn1.savepice.ru/uploads/2022/1/23/1aa9ea5f564aca99fb001cfef1b68668-full.png">
+    
+    </details>
+    
+    
 
 4. Можно ли по выводу `dmesg` понять, осознает ли ОС, что загружена не на настоящем оборудовании, а на системе виртуализации?
    
