@@ -63,9 +63,9 @@
 2. Ознакомьтесь с опциями node_exporter и выводом /metrics по-умолчанию. Приведите несколько опций, которые вы бы выбрали для базового мониторинга хоста по CPU, памяти, диску и сети.
    
    **Ответ:**
-   ```  curl http://localhost:9100/metrics | grep "cpu_"
+   ```  curl http://localhost:9100/metrics | grep "cpu_" ```
    
-   	<details> 
+   <details> 
 		<summary>Вывод:</summary>
 		  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
 					 Dload  Upload   Total   Spent    Left  Speed
