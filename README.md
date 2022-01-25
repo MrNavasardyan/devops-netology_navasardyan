@@ -359,6 +359,26 @@
 6. Запустите любой долгоживущий процесс (не `ls`, который отработает мгновенно, а, например, `sleep 1h`) в отдельном неймспейсе процессов; покажите, что ваш процесс работает под PID 1 через `nsenter`. Для простоты работайте в данном задании под root (`sudo -i`). Под обычным пользователем требуются дополнительные опции (`--map-root-user`) и т.д.
 
     **Ответ:**
+    ```
+    root@vagrant:~# unshare -f --pid --mount-proc sleep 1h
+    
+    root@vagrant:~/node_exporter-1.3.1.linux-amd64# nsenter --target 22436 --pid --mount
+	root@vagrant:/# ps
+	Error, do this: mount -t proc proc /proc
+	root@vagrant:/# mount -t proc proc /proc
+	root@vagrant:/# ps
+	    PID TTY          TIME CMD
+   	  21 pts/1    00:00:00 bash
+   	  33 pts/1    00:00:00 ps
+	root@vagrant:/# ps aux
+	USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+	root           1  0.0  0.4   9876  4168 pts/0    S    11:32   0:00 /bin/bash
+	root           9  0.0  0.0   8076   528 pts/0    T    11:32   0:00 sleep 1h
+	root          19  0.0  0.0   8080   592 pts/0    S+   13:20   0:00 unshare -f --pid --mount-proc sleep 1h
+	root          20  0.0  0.0   8076   596 pts/0    S+   13:20   0:00 sleep 1h
+	root          21  0.0  0.4   9876  4164 pts/1    S    13:22   0:00 -bash
+	root          34  0.0  0.3  11492  3388 pts/1    R+   13:22   0:00 ps aux
+	```
     
     
     
