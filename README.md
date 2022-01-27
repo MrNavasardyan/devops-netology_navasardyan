@@ -8,6 +8,25 @@
   
     **Ответ:**
     ```
+    Unit-файл:
+    vagrant@vagrant:~$ cat /etc/systemd/system/node_exporter.service
+    [Unit]
+    Description=Prometheus Node Exporter
+    Wants=network-online.target
+    After=network-online.target
+
+    [Service]
+    Type=simple
+    Restart=always
+    User=node_exporter
+    Group=node_exporter
+    ExecStart=/usr/local/bin/node_exporter
+
+
+    [Install]
+    WantedBy=multi-user.target
+    ```
+    ```
     root@vagrant:~/node_exporter-1.3.1.linux-amd64# systemctl status node_exporter
 	● node_exporter.service - Prometheus Node Exporter
      Loaded: loaded (/etc/systemd/system/node_exporter.service; enabled; vendor preset: enabled)
