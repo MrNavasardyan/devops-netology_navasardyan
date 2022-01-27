@@ -25,6 +25,7 @@
 
     [Install]
     WantedBy=multi-user.target
+    В автозагрузку добавил через systemctl enable node_exporter
     ```
     ```
     root@vagrant:~/node_exporter-1.3.1.linux-amd64# systemctl status node_exporter
