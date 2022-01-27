@@ -17,8 +17,48 @@
    **Ответ:**
    ***Нет, не могут, т.к. создавая жесткую ссылку на файл, мы привязываемся к его индексному номеру, получая тот же самый файл (с новым именем), на который указывает ссылка, но без физического создании копии. Чтобы сменить права и владельца требуется это сделать для самого объекта, тогда и сменятся права и у файла жесткой ссылки***
 
-3. 
+3. Сделайте vagrant destroy на имеющийся инстанс Ubuntu. Замените содержимое Vagrantfile следующим:
    
+   **Ответ:**
+   <details><summary>Вывод:</summary>
+   root@vagrant:~# fdisk -l
+    Disk /dev/sda: 64 GiB, 68719476736 bytes, 134217728 sectors
+    Disk model: VBOX HARDDISK
+    Units: sectors of 1 * 512 = 512 bytes
+    Sector size (logical/physical): 512 bytes / 512 bytes
+    I/O size (minimum/optimal): 512 bytes / 512 bytes
+    Disklabel type: dos
+    Disk identifier: 0x3f94c461
+
+    Device     Boot   Start       End   Sectors  Size Id Type
+    /dev/sda1  *       2048   1050623   1048576  512M  b W95 FAT32
+    /dev/sda2       1052670 134215679 133163010 63.5G  5 Extended
+    /dev/sda5       1052672 134215679 133163008 63.5G 8e Linux LVM
+
+
+    Disk /dev/sdb: 2.51 GiB, 2684354560 bytes, 5242880 sectors
+    Disk model: VBOX HARDDISK
+    Units: sectors of 1 * 512 = 512 bytes
+    Sector size (logical/physical): 512 bytes / 512 bytes
+    I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+    Disk /dev/sdc: 2.51 GiB, 2684354560 bytes, 5242880 sectors
+    Disk model: VBOX HARDDISK
+    Units: sectors of 1 * 512 = 512 bytes
+    Sector size (logical/physical): 512 bytes / 512 bytes
+    I/O size (minimum/optimal): 512 bytes / 512 bytes
+    </details>
+   
+4. Используя fdisk, разбейте первый диск на 2 раздела: 2 Гб, оставшееся пространство.
+   **Ответ:**
+   ```
+    Device     Boot   Start     End Sectors  Size Id Type
+    /dev/sdb1          2048 4196351 4194304    2G 83 Linux
+    /dev/sdb2       4196352 5220351 1024000  500M 83 Linux
+   ```
+5. Используя sfdisk, перенесите данную таблицу разделов на второй диск.
+
 
 
 
