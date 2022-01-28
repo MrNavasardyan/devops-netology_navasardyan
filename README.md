@@ -102,7 +102,7 @@
     EnvironmentFile=/etc/sysconfig/node_exporter
     ExecStart=/usr/sbin/node_exporter $OPTIONS
 
-
+    в /etc/sysconfig/node_exporter мы прописываем опции.
     ```
     ```
     root@vagrant:~/node_exporter-1.3.1.linux-amd64# systemctl status node_exporter
