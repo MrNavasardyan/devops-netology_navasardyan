@@ -21,33 +21,35 @@
    
    **Ответ:**
    <details><summary>Вывод:</summary>
-   root@vagrant:~# fdisk -l
-    Disk /dev/sda: 64 GiB, 68719476736 bytes, 134217728 sectors
-    Disk model: VBOX HARDDISK
-    Units: sectors of 1 * 512 = 512 bytes
-    Sector size (logical/physical): 512 bytes / 512 bytes
-    I/O size (minimum/optimal): 512 bytes / 512 bytes
-    Disklabel type: dos
-    Disk identifier: 0x3f94c461
+        ```
+        root@vagrant:~# fdisk -l
+        Disk /dev/sda: 64 GiB, 68719476736 bytes, 134217728 sectors
+        Disk model: VBOX HARDDISK
+        Units: sectors of 1 * 512 = 512 bytes
+        Sector size (logical/physical): 512 bytes / 512 bytes
+        I/O size (minimum/optimal): 512 bytes / 512 bytes
+        Disklabel type: dos
+        Disk identifier: 0x3f94c461
+        
+        Device     Boot   Start       End   Sectors  Size Id Type
+        /dev/sda1  *       2048   1050623   1048576  512M  b W95 FAT32
+        /dev/sda2       1052670 134215679 133163010 63.5G  5 Extended
+        /dev/sda5       1052672 134215679 133163008 63.5G 8e Linux LVM
+        ```
+        
+        Disk /dev/sdb: 2.51 GiB, 2684354560 bytes, 5242880 sectors
+        Disk model: VBOX HARDDISK
+        Units: sectors of 1 * 512 = 512 bytes
+        Sector size (logical/physical): 512 bytes / 512 bytes
+        I/O size (minimum/optimal): 512 bytes / 512 bytes
+        ```
 
-    Device     Boot   Start       End   Sectors  Size Id Type
-    /dev/sda1  *       2048   1050623   1048576  512M  b W95 FAT32
-    /dev/sda2       1052670 134215679 133163010 63.5G  5 Extended
-    /dev/sda5       1052672 134215679 133163008 63.5G 8e Linux LVM
-
-
-    Disk /dev/sdb: 2.51 GiB, 2684354560 bytes, 5242880 sectors
-    Disk model: VBOX HARDDISK
-    Units: sectors of 1 * 512 = 512 bytes
-    Sector size (logical/physical): 512 bytes / 512 bytes
-    I/O size (minimum/optimal): 512 bytes / 512 bytes
-
-
-    Disk /dev/sdc: 2.51 GiB, 2684354560 bytes, 5242880 sectors
-    Disk model: VBOX HARDDISK
-    Units: sectors of 1 * 512 = 512 bytes
-    Sector size (logical/physical): 512 bytes / 512 bytes
-    I/O size (minimum/optimal): 512 bytes / 512 bytes
+        Disk /dev/sdc: 2.51 GiB, 2684354560 bytes, 5242880 sectors
+        Disk model: VBOX HARDDISK
+        Units: sectors of 1 * 512 = 512 bytes
+        Sector size (logical/physical): 512 bytes / 512 bytes
+        I/O size (minimum/optimal): 512 bytes / 512 bytes
+        ```
     </details>
    
 4. Используя fdisk, разбейте первый диск на 2 раздела: 2 Гб, оставшееся пространство.
@@ -59,9 +61,103 @@
    ```
 5. Используя sfdisk, перенесите данную таблицу разделов на второй диск.
 
+    **Ответ:**
+    <details><summary>Вывод</summary>
+        root@vagrant:~# sfdisk -d /dev/sdb | sfdisk -f /dev/sdc
+        Checking that no-one is using this disk right now ... OK
+        
+        Disk /dev/sdc: 2.51 GiB, 2684354560 bytes, 5242880 sectors
+        Disk model: VBOX HARDDISK
+        Units: sectors of 1 * 512 = 512 bytes
+        Sector size (logical/physical): 512 bytes / 512 bytes
+        I/O size (minimum/optimal): 512 bytes / 512 bytes
+        ```
+        >>> Script header accepted.
+        >>> Script header accepted.
+        >>> Script header accepted.
+        >>> Script header accepted.
+        >>> Created a new DOS disklabel with disk identifier 0x8dfe0d85.
+        ```
+        /dev/sdc1: Created a new partition 1 of type 'Linux' and of size 2 GiB.
+        /dev/sdc2: Created a new partition 2 of type 'Linux' and of size 500 MiB.
+        /dev/sdc3: Done.
+
+        New situation:
+        Disklabel type: dos
+        Disk identifier: 0x8dfe0d85
+
+        Device     Boot   Start     End Sectors  Size Id Type
+        /dev/sdc1          2048 4196351 4194304    2G 83 Linux
+        /dev/sdc2       4196352 5220351 1024000  500M 83 Linux
+
+        The partition table has been altered.
+        Calling ioctl() to re-read partition table.
+        Syncing disks.
+
+        Disk /dev/sdb: 2.51 GiB, 2684354560 bytes, 5242880 sectors
+        Disk model: VBOX HARDDISK
+        Units: sectors of 1 * 512 = 512 bytes
+        Sector size (logical/physical): 512 bytes / 512 bytes
+        I/O size (minimum/optimal): 512 bytes / 512 bytes
+        Disklabel type: dos
+        Disk identifier: 0x8dfe0d85
+
+        Device     Boot   Start     End Sectors  Size Id Type
+        /dev/sdb1          2048 4196351 4194304    2G 83 Linux
+        /dev/sdb2       4196352 5220351 1024000  500M 83 Linux
 
 
+        Disk /dev/sdc: 2.51 GiB, 2684354560 bytes, 5242880 sectors
+        Disk model: VBOX HARDDISK
+        Units: sectors of 1 * 512 = 512 bytes
+        Sector size (logical/physical): 512 bytes / 512 bytes
+        I/O size (minimum/optimal): 512 bytes / 512 bytes
+        Disklabel type: dos
+        Disk identifier: 0x8dfe0d85
+        
+        Device     Boot   Start     End Sectors  Size Id Type
+        /dev/sdc1          2048 4196351 4194304    2G 83 Linux
+        /dev/sdc2       4196352 5220351 1024000  500M 83 Linux
+        
+    </details>
 
+6. Соберите mdadm RAID1 на паре разделов 2 Гб.  
+   **Ответ:**
+   ```
+   root@vagrant:~# mdadm --create --verbose /dev/md0 --level=1  --raid-devices=3 /dev/sdb1 /dev/hdf2 /dev/sdc1
+    mdadm: Note: this array has metadata at the start and
+    may not be suitable as a boot device.  If you plan to
+    store '/boot' on this device please ensure that
+    your boot-loader understands md/v1.x metadata, or use
+    --metadata=0.90
+    mdadm: cannot open /dev/hdf2: No such file or directory
+    root@vagrant:~# mdadm --create --verbose /dev/md0 --level=1  --raid-devices=2 /dev/sdb1 /dev/sdc1
+    mdadm: Note: this array has metadata at the start and
+    may not be suitable as a boot device.  If you plan to
+    store '/boot' on this device please ensure that
+    your boot-loader understands md/v1.x metadata, or use
+    --metadata=0.90
+    mdadm: size set to 2094080K
+    ontinue creating array? y
+    mdadm: Defaulting to version 1.2 metadata
+    mdadm: array /dev/md0 started.
+    root@vagrant:~# cat /proc/mdstat
+    Personalities : [linear] [multipath] [raid0] [raid1] [raid6] [raid5] [raid4] [raid10]
+    md0 : active raid1 sdc1[1] sdb1[0]
+      2094080 blocks super 1.2 [2/2] [UU]
+    unused devices: <none>
+     ```
+7.  Соберите mdadm RAID0 на второй паре маленьких разделов.
+    ```
+    root@vagrant:~# mdadm --create --verbose /dev/md1 --level=0  --raid-devices=2 /dev/sdb2 /dev/sdc2
+    mdadm: chunk size defaults to 512K
+    mdadm: Defaulting to version 1.2 metadata
+    mdadm: array /dev/md1 started.
+    root@vagrant:~# cat /proc/mdstat
+    Personalities : [linear] [multipath] [raid0] [raid1] [raid6] [raid5] [raid4] [raid10]
+    md1 : active raid0 sdc2[1] sdb2[0]
+      1019904 blocks super 1.2 512k chunks
+      ```
 
 
 
