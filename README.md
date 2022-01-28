@@ -148,6 +148,7 @@
     unused devices: <none>
      ```
 7.  Соберите mdadm RAID0 на второй паре маленьких разделов.
+    **Ответ:**
     ```
     root@vagrant:~# mdadm --create --verbose /dev/md1 --level=0  --raid-devices=2 /dev/sdb2 /dev/sdc2
     mdadm: chunk size defaults to 512K
@@ -158,11 +159,140 @@
     md1 : active raid0 sdc2[1] sdb2[0]
       1019904 blocks super 1.2 512k chunks
       ```
+8. Создайте 2 независимых PV на получившихся md-устройствах.
+    **Ответ:**
+    ```
+    root@vagrant:~# pvcreate data /dev/md1
+    Device data not found.
+    Physical volume "/dev/md1" successfully created.
+    root@vagrant:~# pvcreate data /dev/md0
+    Device data not found.
+    Physical volume "/dev/md0" successfully created.
+    root@vagrant:~# psv
+    -bash: psv: command not found
+    root@vagrant:~# pvs
+    PV         VG        Fmt  Attr PSize   PFree
+    /dev/md0             lvm2 ---   <2.00g  <2.00g
+    /dev/md1             lvm2 ---  996.00m 996.00m
+    /dev/sda5  vgvagrant lvm2 a--  <63.50g      0
+    ```
+9. Создайте общую volume-group на этих двух PV.
+    **Ответ:**
+    ```
+    root@vagrant:~# vgcreate data /dev/md1 /dev/md0
+    Volume group "data" successfully created
+    ```
+    <details><summary>Вывод vgroups</summary>
 
+        --- Volume group ---
+        VG Name               vgvagrant
+        System ID
+        Format                lvm2
+        Metadata Areas        1
+        Metadata Sequence No  3
+        VG Access             read/write
+        VG Status             resizable
+        MAX LV                0
+        Cur LV                2
+        Open LV               2
+        Max PV                0
+        Cur PV                1
+        Act PV                1
+        VG Size               <63.50 GiB
+        PE Size               4.00 MiB
+        Total PE              16255
+        Alloc PE / Size       16255 / <63.50 GiB
+        Free  PE / Size       0 / 0
+        VG UUID               PaBfZ0-3I0c-iIdl-uXKt-JL4K-f4tT-kzfcyE
 
+        --- Volume group ---
+        VG Name               data
+        System ID
+        Format                lvm2
+        Metadata Areas        2
+        Metadata Sequence No  1
+        VG Access             read/write
+        VG Status             resizable
+        MAX LV                0
+        Cur LV                0
+        Open LV               0
+        Max PV                0
+        Cur PV                2
+        Act PV                2
+        VG Size               2.96 GiB
+        PE Size               4.00 MiB
+        Total PE              759
+        Alloc PE / Size       0 / 0
+        Free  PE / Size       759 / 2.96 GiB
+        VG UUID               QhNmAi-IHc0-LWEc-WKxU-gUZI-bHxo-v0WgZM
+    </details>
+10. Создайте LV размером 100 Мб, указав его расположение на PV с RAID0.
+    **Ответ:**
+    ```
+    root@vagrant:~# lvcreate -L 100M data /dev/md1
+    Logical volume "lvol0" created.
+    ```
+11. Создайте mkfs.ext4 ФС на получившемся LV.
+    **Ответ:**
+    ```
+    root@vagrant:~# mkfs.ext4 /dev/mapper/data-lvol0
+    mke2fs 1.45.5 (07-Jan-2020)
+    Creating filesystem with 25600 4k blocks and 25600 inodes
 
+    Allocating group tables: done
+    Writing inode tables: done
+    Creating journal (1024 blocks): done
+    Writing superblocks and filesystem accounting information: done
+    ```
+12. Смонтируйте этот раздел в любую директорию, например, /tmp/new.
+    **Ответ:**
+    ```
+    root@vagrant:~# mount /dev/mapper/data-lvol0 /tmp/new
+    ```
 
-
+13. Поместите туда тестовый файл, например wget https://mirror.yandex.ru/ubuntu/ls-lR.gz -O /tmp/new/test.gz
+    **Ответ:**
+    ```
+    wget https://mirror.yandex.ru/ubuntu/ls-lR.gz -O /tmp/new/test.gz /tmp/new
+    ```
+14. Прикрепите вывод lsblk.
+    **Ответ:**
+    ```
+    root@vagrant:~# lsblk
+    NAME                 MAJ:MIN RM  SIZE RO TYPE  MOUNTPOINT
+    sda                    8:0    0   64G  0 disk
+    ├─sda1                 8:1    0  512M  0 part  /boot/efi
+    ├─sda2                 8:2    0    1K  0 part
+    └─sda5                 8:5    0 63.5G  0 part
+    ├─vgvagrant-root   253:0    0 62.6G  0 lvm   /
+    └─vgvagrant-swap_1 253:1    0  980M  0 lvm   [SWAP]
+    sdb                    8:16   0  2.5G  0 disk
+    ├─sdb1                 8:17   0    2G  0 part
+    │ └─md0                9:0    0    2G  0 raid1
+    └─sdb2                 8:18   0  500M  0 part
+    └─md1                9:1    0  996M  0 raid0
+        └─data-lvol0     253:2    0  100M  0 lvm   /tmp/new
+    sdc                    8:32   0  2.5G  0 disk
+    ├─sdc1                 8:33   0    2G  0 part
+    │ └─md0                9:0    0    2G  0 raid1
+    └─sdc2                 8:34   0  500M  0 part
+    └─md1                9:1    0  996M  0 raid0
+        └─data-lvol0     253:2    0  100M  0 lvm   /tmp/new
+    ```
+15. Протестируйте целостность файла:
+    **Ответ:**
+    ```
+    root@vagrant:~# gzip -t /tmp/new/test.gz
+    root@vagrant:~# echo $?
+    0
+    ```
+16. Используя pvmove, переместите содержимое PV с RAID0 на RAID1.
+    **Ответ:**
+    ```
+    root@vagrant:~# pvmove /dev/md1 /dev/md0
+    /dev/md1: Moved: 20.00%
+    /dev/md1: Moved: 100.00%
+    ```
 
 # Домашнее задание к занятию "3.4. Операционные системы, лекция 2"
 
