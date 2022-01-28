@@ -96,6 +96,13 @@
     [Install]
     WantedBy=multi-user.target
     В автозагрузку добавил через systemctl enable node_exporter
+
+    Чтобы допустить возможность запускать сервис с доп.опциями требуется добавить в unit файл, секция [Service] следующее:
+
+    EnvironmentFile=/etc/sysconfig/node_exporter
+    ExecStart=/usr/sbin/node_exporter $OPTIONS
+
+
     ```
     ```
     root@vagrant:~/node_exporter-1.3.1.linux-amd64# systemctl status node_exporter
