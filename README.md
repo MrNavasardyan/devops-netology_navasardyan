@@ -253,7 +253,7 @@
 13. Поместите туда тестовый файл, например wget https://mirror.yandex.ru/ubuntu/ls-lR.gz -O /tmp/new/test.gz
     **Ответ:**
     ```
-    wget https://mirror.yandex.ru/ubuntu/ls-lR.gz -O /tmp/new/test.gz /tmp/new
+    wget https://mirror.yandex.ru/ubuntu/ls-lR.gz -O /tmp/new/test.gz 
     ```
 14. Прикрепите вывод lsblk.
     **Ответ:**
