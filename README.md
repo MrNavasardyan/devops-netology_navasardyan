@@ -293,6 +293,34 @@
     /dev/md1: Moved: 20.00%
     /dev/md1: Moved: 100.00%
     ```
+17. Сделайте --fail на устройство в вашем RAID1 md.
+    **Ответ:**
+    ```
+    root@vagrant:~# mdadm /dev/md0 --fail /dev/sdb1
+    mdadm: set /dev/sdb1 faulty in /dev/md0
+    ```
+18. Подтвердите выводом dmesg, что RAID1 работает в деградированном состоянии.
+
+    **Ответ:**
+    ```
+    root@vagrant:~# dmesg |grep md1
+    [14271.993660] md1: detected capacity change from 0 to 1044381696
+    root@vagrant:~# dmesg |grep md0
+    [14100.711916] md/raid1:md0: not clean -- starting background reconstruction
+    [14100.711918] md/raid1:md0: active with 2 out of 2 mirrors
+    [14100.711943] md0: detected capacity change from 0 to 2144337920
+    [14100.712549] md: resync of RAID array md0
+    [14111.122962] md: md0: resync done.
+    [24862.627709] md/raid1:md0: Disk failure on sdb1, disabling device.
+                md/raid1:md0: Operation continuing on 1 devices.
+    ```
+19. Протестируйте целостность файла, несмотря на "сбойный" диск он должен продолжать быть доступен:
+     **Ответ:**
+    ```
+    root@vagrant:~# gzip -t /tmp/new/test.gz
+    root@vagrant:~# echo $?
+    0
+    ```
 
 # Домашнее задание к занятию "3.4. Операционные системы, лекция 2"
 
