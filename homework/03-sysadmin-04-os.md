@@ -31,11 +31,9 @@
     в /etc/sysconfig/node_exporter мы прописываем опции.
     OPTIONS="--collector.textfile.directory=/var/lib/node_exporter/textfile_collector" (text_collector, прописываем нужные собираемые метрики"
     либо 
-    OPTIONS="-h"
+    OPTIONS="--collector.cpu.info" список опций доступно в node_exporter --help
     Служба при перезапуске будет запускаться с опциями которые описаны в файле /etc/sysconfig/node_exporter
-    
-    Еще вариант:
-    systemctl start node_exporter -опции запуска
+
     
     ```
     ```
