@@ -73,6 +73,8 @@ Status Code: 200
     remarks:        * To view the original object, please query the RIPE Database at:
     remarks:        * http://www.ripe.net/whois
     remarks:        ****************************
+    
+    Провайдер: MNT-ZOLOTAYALINIA, автономная система origin: AS41148
     ```
 
 5. Через какие сети проходит пакет, отправленный с вашего компьютера на адрес 8.8.8.8? Через какие AS? Воспользуйтесь утилитой `traceroute`
