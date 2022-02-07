@@ -1,3 +1,5 @@
+# Домашние задания находятся в папке /homework
+
 # devops-netology_navasardyan
 MyFirstProjectOnGit
 These files will be ignored in directory /terraform :
