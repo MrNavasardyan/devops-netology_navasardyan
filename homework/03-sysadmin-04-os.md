@@ -20,19 +20,21 @@
     Restart=always
     User=node_exporter
     Group=node_exporter
-    ExecStart=/usr/local/bin/node_exporter
-
+    EnvironmentFile=/etc/sysconfig/node_exporter
+    ExecStart=/usr/sbin/node_exporter $OPTIONS
 
     [Install]
     WantedBy=multi-user.target
     В автозагрузку добавил через systemctl enable node_exporter
 
-    Чтобы допустить возможность запускать сервис с доп.опциями требуется добавить в unit файл, секция [Service] следующее:
-
-    EnvironmentFile=/etc/sysconfig/node_exporter
-    ExecStart=/usr/sbin/node_exporter $OPTIONS
-
+    Доработка, передача дополнительных опций при запуске службы:
     в /etc/sysconfig/node_exporter мы прописываем опции.
+    OPTIONS="--collector.textfile.directory=/var/lib/node_exporter/textfile_collector" (text_collector, прописываем нужные собираемые метрики"
+    либо 
+    OPTIONS="--collector.cpu.info" список опций доступно в node_exporter --help
+    Служба при перезапуске будет запускаться с опциями которые описаны в файле /etc/sysconfig/node_exporter
+
+    
     ```
     ```
     root@vagrant:~/node_exporter-1.3.1.linux-amd64# systemctl status node_exporter
