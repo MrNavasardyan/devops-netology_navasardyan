@@ -48,12 +48,12 @@ Request Method: GET
 Status Code: 200
 ```
 
-![alt](img/3_6_1.png)
+![alt](https://github.com/MrNavasardyan/devops-netology_navasardyan/blob/main/homework/img/3_6_1.PNG)
 
 3. Какой IP адрес у вас в интернете?
    
    ***Ответ:***
-![alt](img/3_6_2.png)   
+![alt](https://github.com/MrNavasardyan/devops-netology_navasardyan/blob/main/homework/img/3_6_2.PNG)   
 
 4. Какому провайдеру принадлежит ваш IP адрес? Какой автономной системе AS? Воспользуйтесь утилитой `whois`
 
@@ -126,7 +126,7 @@ Status Code: 200
 6. Повторите задание 5 в утилите `mtr`. На каком участке наибольшая задержка - delay?
 
 ***Ответ:***
-![alt](img/3_6_3.png)
+![alt](https://github.com/MrNavasardyan/devops-netology_navasardyan/blob/main/homework/img/3_6_3.PNG)
 
     Наибольшая задержка на участке 11. AS15169  216.239.51.32
 
