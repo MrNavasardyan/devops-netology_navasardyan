@@ -82,6 +82,8 @@ Status Code: 200
    ***Ответ:***
     ```
         С виртуалки Vagrant получаю такие данные:
+        vagrant@vagrant:traceroute -An 8.8.8.8
+        traceroute to 8.8.8.8 (8.8.8.8), 30 hops max, 60 byte packets
 
         1  10.0.2.2 [*]  0.246 ms  0.227 ms  0.188 ms
         2  * * *
