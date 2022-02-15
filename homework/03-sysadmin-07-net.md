@@ -93,7 +93,7 @@
     ```
     Используется технология VLAN (VLAN ID - метка в диапазоне 1 - 4096)
     Пакет vlan (apt-get install vlan)
-    nano /etc/network/interfaces 
+    nano /etc/network/interfaces
     auto vlan1400
     iface vlan1400 inet static
         address 192.168.1.1
