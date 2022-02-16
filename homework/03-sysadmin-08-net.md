@@ -357,8 +357,8 @@ show bgp x.x.x.x/32
 
 5. Используя diagrams.net, создайте L3 диаграмму вашей домашней сети или любой другой сети, с которой вы работали. 
     ***Ответ:***
-    
 
+![alt](https://github.com/MrNavasardyan/devops-netology_navasardyan/blob/main/homework/img/3_6_8.PNG)
  ---
 ## Задание для самостоятельной отработки (необязательно к выполнению)
 
