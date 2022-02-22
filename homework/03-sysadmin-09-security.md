@@ -84,6 +84,7 @@
 
 
 7. Соберите дамп трафика утилитой tcpdump в формате pcap, 100 пакетов. Откройте файл pcap в Wireshark.
+   ![](https://github.com/MrNavasardyan/devops-netology_navasardyan/blob/main/homework/img/3_9_7.PNG)
    
 
  ---
