@@ -75,7 +75,7 @@
    ***Ответ***
    ![](https://github.com/MrNavasardyan/devops-netology_navasardyan/blob/main/homework/img/3_9_6.PNG)
    ```
-   В файл hosts добавил следующие запись:
+   В файл hosts добавил следующую запись:
    [root@node-1 ~]# cat /etc/hosts
    127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
    ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
