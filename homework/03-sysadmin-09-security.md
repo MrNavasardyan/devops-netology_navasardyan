@@ -18,6 +18,9 @@
    При установке самоподписанного сертификата получаю ошибку на локальном хосте 
    NET::ERR_CERT_COMMON_NAME_INVALID, 
    сам сертификат добавлен в центр сертификатов на локальном  хосте
+   В файле конфигурации сертификат так же прописан корректно
+   SSLCertificateFile      /etc/ssl/certs/apache-selfsigned.crt
+   SSLCertificateKeyFile    /etc/ssl/private/apache-selfsigned.key
    ```
 
    ![](https://github.com/MrNavasardyan/devops-netology_navasardyan/blob/main/homework/img/3_9_3_1.PNG)
