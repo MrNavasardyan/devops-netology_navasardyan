@@ -9,6 +9,7 @@
    ![](https://github.com/MrNavasardyan/devops-netology_navasardyan/blob/main/homework/img/3_9_22.jpg)
 
 3. Установите apache2, сгенерируйте самоподписанный сертификат, настройте тестовый сайт для работы по HTTPS.
+   ![](https://github.com/MrNavasardyan/devops-netology_navasardyan/blob/main/homework/img/3_9_3.png)
    
 
 4. Проверьте на TLS уязвимости произвольный сайт в интернете (кроме сайтов МВД, ФСБ, МинОбр, НацБанк, РосКосмос, РосАтом, РосНАНО и любых госкомпаний, объектов КИИ, ВПК ... и тому подобное).
@@ -72,6 +73,7 @@
    
  
 6. Переименуйте файлы ключей из задания 5. Настройте файл конфигурации SSH клиента, так чтобы вход на удаленный сервер осуществлялся по имени сервера.
+   
    ***Ответ***
    ![](https://github.com/MrNavasardyan/devops-netology_navasardyan/blob/main/homework/img/3_9_6.PNG)
    ```
@@ -84,6 +86,11 @@
 
 
 7. Соберите дамп трафика утилитой tcpdump в формате pcap, 100 пакетов. Откройте файл pcap в Wireshark.
+   
+   ***Ответ:***
+   ```
+   tcpdump -i ens3 -c 100 -w dump.pcap
+   ```
    ![](https://github.com/MrNavasardyan/devops-netology_navasardyan/blob/main/homework/img/3_9_7.PNG)
    
 
