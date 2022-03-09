@@ -107,10 +107,10 @@ do
         x=$?
         if [ $x -ne 0 ]; then
           echo "$line" >> error.log
-          fi
-          if [ $x -eq 0 ]; then
+        fi
+        if [ $x -eq 0 ]; then
           continue
-          fi
+        fi
 done
 done
 
