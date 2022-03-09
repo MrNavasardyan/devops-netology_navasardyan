@@ -11,14 +11,21 @@
 
 3. Установите apache2, сгенерируйте самоподписанный сертификат, настройте тестовый сайт для работы по HTTPS.
    ***Ответ:***
-   ![](https://github.com/MrNavasardyan/devops-netology_navasardyan/blob/main/homework/img/3_9_3.png)
 
+   ![](https://github.com/MrNavasardyan/devops-netology_navasardyan/blob/main/homework/img/3_9_3.PNG)
+   
+      ```
+   При установке самоподписанного сертификата получаю ошибку на локальном хосте 
+   NET::ERR_CERT_COMMON_NAME_INVALID, 
+   сам сертификат добавлен в центр сертификатов на локальном  хосте
+   В файле конфигурации сертификат так же прописан корректно
+   SSLCertificateFile      /etc/ssl/certs/apache-selfsigned.crt
+   SSLCertificateKeyFile    /etc/ssl/private/apache-selfsigned.key
+   ```
 
-   ```
-   При установке самоподписанного сертификата получаю ошибку на локальном хосте NET::ERR_CERT_COMMON_NAME_INVALID, сам сертификат добавлен в центр сертификатов на локальном хосте
-   ```
-   ![](https://github.com/MrNavasardyan/devops-netology_navasardyan/blob/main/homework/img/3_9_3_1.png)
-   ![](https://github.com/MrNavasardyan/devops-netology_navasardyan/blob/main/homework/img/3_9_3_2.png)
+   ![](https://github.com/MrNavasardyan/devops-netology_navasardyan/blob/main/homework/img/3_9_3_1.PNG)
+   
+   ![](https://github.com/MrNavasardyan/devops-netology_navasardyan/blob/main/homework/img/3_9_3_2.PNG)
 
 
 4. Проверьте на TLS уязвимости произвольный сайт в интернете (кроме сайтов МВД, ФСБ, МинОбр, НацБанк, РосКосмос, РосАтом, РосНАНО и любых госкомпаний, объектов КИИ, ВПК ... и тому подобное).
