@@ -101,8 +101,13 @@ else:
 ```
 [root@node-1 JSFREE-4]# python3 scripttt.py
 /home/JSFREE-4 README.md
+
 [root@node-1 JSFREE-4]# python3 scripttt.py /home/devops-netology_navasardyan/
 /home/devops-netology_navasardyan/README.md
+
+[root@node-1 ~]# python3 script.py
+fatal: not a git repository (or any of the parent directories): .git
+
 ```
 
 ## Обязательная задача 4
