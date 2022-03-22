@@ -53,13 +53,13 @@ import yaml
 
 s = {'drive.google.com':'10.10.0.0', 'mail.google.com':'172.4.0.0', 'google.com':'172.3.10.0'}
 
-while True: # Цикл сделал бесконечным, понимаю что он должен опрашивать постоянно?
+while True:
     for h in s:
         ping = os.system("ping -c 1 " + s[h] + '> /dev/null 2>&1')
         if ping != 0:
             new_ip = socket.gethostbyname(h)
             print('[ERROR]: ' + str(h) + ' IP mismatch: ' + s[h] + ' ' + new_ip)
-            s[h]=new_ip # Добавил замену старого IP на новый, чтобы при следующей итерации подставлялся новый, просьба подсказать корректно ли это?
+            s[h]=new_ip
             with open(f'{h}'+'.json','w') as js:
                  json_data= json.dumps({h : new_ip})
                  jsf.write(json_data)
