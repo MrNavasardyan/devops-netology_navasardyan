@@ -60,11 +60,9 @@ while True: # Цикл сделал бесконечным, понимаю чт�
             new_ip = socket.gethostbyname(h)
             print('[ERROR]: ' + str(h) + ' IP mismatch: ' + s[h] + ' ' + new_ip)
             s[h]=new_ip # Добавил замену старого IP на новый, чтобы при следующей итерации подставлялся новый, просьба подсказать корректно ли это?
-                        # json
             with open(f'{h}'+'.json','w') as js:
                  json_data= json.dumps({h : new_ip})
                  jsf.write(json_data)
-                # yaml
             with open(f'{h}'+'.yaml','w') as ym:
                  yaml_data= yaml.dump([{h : new_ip}])
                  ymf.write(yaml_data)
