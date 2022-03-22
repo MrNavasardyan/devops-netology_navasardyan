@@ -121,19 +121,19 @@ import os
 import socket
 import time
 
-srv = {'drive.google.com':'10.10.0.0', 'mail.google.com':'172.4.0.0', 'google.com':'172.3.10.0'}
+s = {'drive.google.com':'10.10.0.0', 'mail.google.com':'172.4.0.0', 'google.com':'172.3.10.0'}
 
 while True: # Цикл сделал бесконечным, понимаю что он должен опрашивать постоянно?
-        for h in srv:
-                ping = os.system("ping -c 1 " + srv[h] + '> /dev/null 2>&1')
+        for h in s:
+                ping = os.system("ping -c 1 " + s[h] + '> /dev/null 2>&1')
                 if ping != 0:
                         new_ip = socket.gethostbyname(h)
-                        print('[ERROR]: ' + str(h) + ' IP mismatch: ' + srv[h] + ' ' + new_ip)
-                        srv[h]=new_ip # Добавил замену старого IP на новый, чтобы при следующей итерации подставлялся новый, просьба подсказать корректно ли это?
+                        print('[ERROR]: ' + str(h) + ' IP mismatch: ' + s[h] + ' ' + new_ip)
+                        s[h]=new_ip # Добавил замену старого IP на новый, чтобы при следующей итерации подставлялся новый, просьба подсказать корректно ли это?
                 else:
-                        print('[SUCCESS]: ' + str(h) + ' '+ srv[h])
+                        print('[SUCCESS]: ' + str(h) + ' '+ s[h])
         time.sleep(10)
-
+        
 ```
 
 ### Вывод скрипта при запуске при тестировании:
