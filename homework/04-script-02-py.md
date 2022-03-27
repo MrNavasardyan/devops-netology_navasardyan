@@ -48,22 +48,25 @@ for result in result_os.split('\n'):
 import os
 
 bash_command = ["cd /home/homework/devops-netology_navasardyan", "git status"]
+path = os.getcwd()
 result_os = os.popen(' && '.join(bash_command)).read()
 #is_change = False нигде не используется
 for result in result_os.split('\n'):
     if result.find('modified') != -1:
         prepare_result = result.replace('\tmodified:   ', '')
-        print(prepare_result)
+        print(path + ' ' + prepare_result)
         #break так же требуется убрать,т.к. прерывает цикл
 
 ```
 
 ### Вывод скрипта при запуске при тестировании:
 ```
-изменил файлы в локальном репозитории README.md has_been_moved.txt
-[root@node-2 homework]# python3 script.py
+изменил файлы в локальном репозитории README.md 
+[root@node-1 devops-netology_navasardyan]# python3 script1.py
+/home/homework/devops-netology_navasardyan README.md
+
 README.md
-has_been_moved.txt
+
 ```
 
 ## Обязательная задача 3
@@ -117,37 +120,129 @@ fatal: not a git repository (or any of the parent directories): .git
 
 ### Ваш скрипт:
 ```python
-import os
-import socket
-import time
+# import os
+# import socket
+# import time
+# import requests
+# r = requests.get('https://api.binance.com/api/v1/ping')
+# print(r)
 
-s = {'drive.google.com':'10.10.0.0', 'mail.google.com':'172.4.0.0', 'google.com':'172.3.10.0'}
+# s = {'drive.google.com':'10.10.0.0', 'mail.google.com':'172.4.0.0', 'google.com':'172.3.10.0'}
 
-while True: # Цикл сделал бесконечным, понимаю что он должен опрашивать постоянно?
-        for h in s:
-                ping = os.system("ping -c 1 " + s[h] + '> /dev/null 2>&1')
-                if ping != 0:
-                        new_ip = socket.gethostbyname(h)
-                        print('[ERROR]: ' + str(h) + ' IP mismatch: ' + s[h] + ' ' + new_ip)
-                        s[h]=new_ip # Добавил замену старого IP на новый, чтобы при следующей итерации подставлялся новый, просьба подсказать корректно ли это?
-                else:
-                        print('[SUCCESS]: ' + str(h) + ' '+ s[h])
-        time.sleep(10)
+# while True: # Цикл сделал бесконечным, понимаю что он должен опрашивать постоянно?
+#         for h in s:
+#                 ping = pyping.ping(s[h])
+#                 #ping = os.system("ping -c 1 " + s[h] + '> /dev/null 2>&1')
+#                 if ping != 0:
+#                         new_ip = socket.gethostbyname(h)
+#                         print('[ERROR]: ' + str(h) + ' IP mismatch: ' + s[h] + ' ' + new_ip)
+#                         s[h]=new_ip # Добавил замену старого IP на новый, чтобы при следующей итерации подставлялся новый, просьба подсказать корректно ли это?
+#                 else:
+#                         print('[SUCCESS]: ' + str(h) + ' '+ s[h])
+#         time.sleep(10)
         
+Доработка без использования bash:
+
+import socket as s
+import time
+from pythonping import ping
+
+
+srv = {'drive.google.com':'10.0.0.0', 'mail.google.com':'172.4.0.0', 'google.com':'172.3.0.0'}
+
+while True:
+        for h in srv:
+                print(srv[h])
+                p = ping(srv[h], verbose=True)
+                print(p)
+                #ping = os.system('ping -c 1 ' + srv[host] + '> /dev/null 2>&1')
+                if p.success():
+                        print('[SUCCESS]: ' + str(h) + ' ' + srv[h])
+
+                else:
+                        new_ip = s.gethostbyname(h)
+                        print('[ERROR]: ' + str(h) + ' IP mismatch: ' + srv[h] + ' ' + new_ip)
+                        srv[h] = new_ip
+
+        time.sleep(10)
+
 ```
 
 ### Вывод скрипта при запуске при тестировании:
 ```
-[root@node-2 ~]# python3 net.py
-[ERROR]: drive.google.com IP mismatch: 10.0.0.0 172.217.18.110
-[ERROR]: mail.google.com IP mismatch: 172.4.0.0 142.250.185.229
-[ERROR]: google.com IP mismatch: 172.3.0.0 142.250.186.142
-[SUCCESS]: drive.google.com 172.217.18.110
-[SUCCESS]: mail.google.com 142.250.185.229
-[SUCCESS]: google.com 142.250.186.142
-[SUCCESS]: drive.google.com 172.217.16.142
-[SUCCESS]: mail.google.com 142.250.185.229
-[SUCCESS]: google.com 142.250.186.142
+10.0.0.0
+Request timed out
+Request timed out
+Request timed out
+Request timed out
+Request timed out
+Request timed out
+Request timed out
+Request timed out
+
+Round Trip Times min/avg/max is 2000/2000.0/2000 ms
+[ERROR]: drive.google.com IP mismatch: 10.0.0.0 209.85.233.100
+172.4.0.0
+Request timed out
+Request timed out
+Request timed out
+Request timed out
+Request timed out
+Request timed out
+Request timed out
+Request timed out
+
+Round Trip Times min/avg/max is 2000/2000.0/2000 ms
+[ERROR]: mail.google.com IP mismatch: 172.4.0.0 64.233.165.18
+172.3.0.0
+Request timed out
+Request timed out
+Request timed out
+Request timed out
+Request timed out
+Request timed out
+Request timed out
+Request timed out
+
+Round Trip Times min/avg/max is 2000/2000.0/2000 ms
+[ERROR]: google.com IP mismatch: 172.3.0.0 142.250.150.138
+209.85.233.100
+Reply from 209.85.233.100, 29 bytes in 74.73ms
+Reply from 209.85.233.100, 29 bytes in 71.22ms
+Reply from 209.85.233.100, 29 bytes in 71.52ms
+Reply from 209.85.233.100, 29 bytes in 70.96ms
+Reply from 209.85.233.100, 29 bytes in 74.73ms
+Reply from 209.85.233.100, 29 bytes in 71.22ms
+Reply from 209.85.233.100, 29 bytes in 71.52ms
+Reply from 209.85.233.100, 29 bytes in 70.96ms
+
+Round Trip Times min/avg/max is 70.96/72.11/74.73 ms
+[SUCCESS]: drive.google.com 209.85.233.100
+64.233.165.18
+Reply from 64.233.165.18, 29 bytes in 34.52ms
+Reply from 64.233.165.18, 29 bytes in 33.21ms
+Reply from 64.233.165.18, 29 bytes in 34.31ms
+Reply from 64.233.165.18, 29 bytes in 32.68ms
+Reply from 64.233.165.18, 29 bytes in 34.52ms
+Reply from 64.233.165.18, 29 bytes in 33.21ms
+Reply from 64.233.165.18, 29 bytes in 34.31ms
+Reply from 64.233.165.18, 29 bytes in 32.68ms
+
+Round Trip Times min/avg/max is 32.68/33.68/34.52 ms
+[SUCCESS]: mail.google.com 64.233.165.18
+142.250.150.138
+Reply from 142.250.150.138, 29 bytes in 33.97ms
+Reply from 142.250.150.138, 29 bytes in 35.89ms
+Reply from 142.250.150.138, 29 bytes in 33.97ms
+Reply from 142.250.150.138, 29 bytes in 37.89ms
+Reply from 142.250.150.138, 29 bytes in 33.97ms
+Reply from 142.250.150.138, 29 bytes in 35.89ms
+Reply from 142.250.150.138, 29 bytes in 33.97ms
+Reply from 142.250.150.138, 29 bytes in 37.89ms
+
+Round Trip Times min/avg/max is 33.97/35.43/37.89 ms
+[SUCCESS]: google.com 142.250.150.138
+
 ```
 
 ## Дополнительное задание (со звездочкой*) - необязательно к выполнению
