@@ -48,7 +48,7 @@ for result in result_os.split('\n'):
 import os
 
 bash_command = ["cd /home/homework/devops-netology_navasardyan", "git status"]
-path = os.getcwd()
+path = os.getcwd() # доработка с путями
 result_os = os.popen(' && '.join(bash_command)).read()
 #is_change = False нигде не используется
 for result in result_os.split('\n'):
@@ -148,21 +148,21 @@ import time
 from pythonping import ping
 
 
-srv = {'drive.google.com':'10.0.0.0', 'mail.google.com':'172.4.0.0', 'google.com':'172.3.0.0'}
+s = {'drive.google.com':'10.0.0.0', 'mail.google.com':'172.4.0.0', 'google.com':'172.3.0.0'}
 
 while True:
-        for h in srv:
-                print(srv[h])
-                p = ping(srv[h], verbose=True)
+        for h in s:
+                print(s[h])
+                p = ping(s[h], verbose=True)
                 print(p)
-                #ping = os.system('ping -c 1 ' + srv[host] + '> /dev/null 2>&1')
+                
                 if p.success():
-                        print('[SUCCESS]: ' + str(h) + ' ' + srv[h])
+                        print('[SUCCESS]: ' + str(h) + ' ' + s[h])
 
                 else:
                         new_ip = s.gethostbyname(h)
-                        print('[ERROR]: ' + str(h) + ' IP mismatch: ' + srv[h] + ' ' + new_ip)
-                        srv[h] = new_ip
+                        print('[ERROR]: ' + str(h) + ' IP mismatch: ' + s[h] + ' ' + new_ip)
+                        s[h] = new_ip
 
         time.sleep(10)
 
