@@ -129,7 +129,6 @@ fatal: not a git repository (or any of the parent directories): .git
 
 # while True: # Цикл сделал бесконечным, понимаю что он должен опрашивать постоянно?
 #         for h in s:
-#                 ping = pyping.ping(s[h])
 #                 #ping = os.system("ping -c 1 " + s[h] + '> /dev/null 2>&1')
 #                 if ping != 0:
 #                         new_ip = socket.gethostbyname(h)
