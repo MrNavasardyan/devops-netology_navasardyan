@@ -124,8 +124,6 @@ fatal: not a git repository (or any of the parent directories): .git
 # import socket
 # import time
 # import requests
-# r = requests.get('https://api.binance.com/api/v1/ping')
-# print(r)
 
 # s = {'drive.google.com':'10.10.0.0', 'mail.google.com':'172.4.0.0', 'google.com':'172.3.10.0'}
 
@@ -143,7 +141,7 @@ fatal: not a git repository (or any of the parent directories): .git
         
 Доработка без использования bash:
 
-import socket as s
+import socket
 import time
 from pythonping import ping
 
@@ -159,7 +157,7 @@ while True:
                         print('[SUCCESS]: ' + str(h) + ' ' + s[h])
 
                 else:
-                        new_ip = s.gethostbyname(h)
+                        new_ip = socket.gethostbyname(h)
                         print('[ERROR]: ' + str(h) + ' IP mismatch: ' + s[h] + ' ' + new_ip)
                         s[h] = new_ip
 
