@@ -154,8 +154,7 @@ while True:
         for h in s:
                 print(s[h])
                 p = ping(s[h], verbose=True)
-                print(p)
-                
+
                 if p.success():
                         print('[SUCCESS]: ' + str(h) + ' ' + s[h])
 
