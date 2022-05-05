@@ -1,0 +1,133 @@
+
+# Домашнее задание к занятию "5.3. Введение. Экосистема. Архитектура. Жизненный цикл Docker контейнера"
+
+## Как сдавать задания
+
+Обязательными к выполнению являются задачи без указания звездочки. Их выполнение необходимо для получения зачета и диплома о профессиональной переподготовке.
+
+Задачи со звездочкой (*) являются дополнительными задачами и/или задачами повышенной сложности. Они не являются обязательными к выполнению, но помогут вам глубже понять тему.
+
+Домашнее задание выполните в файле readme.md в github репозитории. В личном кабинете отправьте на проверку ссылку на .md-файл в вашем репозитории.
+
+Любые вопросы по решению задач задавайте в чате учебной группы.
+
+---
+
+## Задача 1
+
+Сценарий выполения задачи:
+
+- создайте свой репозиторий на https://hub.docker.com;
+- выберете любой образ, который содержит веб-сервер Nginx;
+- создайте свой fork образа;
+- реализуйте функциональность:
+запуск веб-сервера в фоне с индекс-страницей, содержащей HTML-код ниже:
+```
+<html>
+<head>
+Hey, Netology
+</head>
+<body>
+<h1>I’m DevOps Engineer!</h1>
+</body>
+</html>
+```
+Опубликуйте созданный форк в своем репозитории и предоставьте ответ в виде ссылки на https://hub.docker.com/username_repo.
+
+```
+https://hub.docker.com/r/ngrachik/netology/tags
+
+[root@node-2 html]# docker run --name b61806f8ef72 -d -p 8080:80 ngrachik/netology:v1
+d1a8de7829419e606c2b5e691b24c0d949ad8f6f135d0ba2efaf89206574456a
+
+[root@node-2 html]# curl -L localhost:8080
+<html>
+<head>
+Hey, Netology
+</head>
+<body>
+<h1>My name is Grachik Navasardyan and I’m DevOps Engineer!</h1>
+</body>
+</html>
+```
+
+## Задача 2
+
+Посмотрите на сценарий ниже и ответьте на вопрос:
+"Подходит ли в этом сценарии использование Docker контейнеров или лучше подойдет виртуальная машина, физическая машина? Может быть возможны разные варианты?"
+
+Детально опишите и обоснуйте свой выбор.
+
+--
+
+Сценарий:
+
+- Высоконагруженное монолитное java веб-приложение;
+- Nodejs веб-приложение;
+- Мобильное приложение c версиями для Android и iOS;
+- Шина данных на базе Apache Kafka;
+- Elasticsearch кластер для реализации логирования продуктивного веб-приложения - три ноды elasticsearch, два logstash и две ноды kibana;
+- Мониторинг-стек на базе Prometheus и Grafana;
+- MongoDB, как основное хранилище данных для java-приложения;
+- Gitlab сервер для реализации CI/CD процессов и приватный (закрытый) Docker Registry.
+
+## Задача 3
+
+- Запустите первый контейнер из образа ***centos*** c любым тэгом в фоновом режиме, подключив папку ```/data``` из текущей рабочей директории на хостовой машине в ```/data``` контейнера;
+```
+[root@node-2 centosdebian]# docker run --name test -it -d -v /home/docker/centosdebian/data:/tmp centos
+d16563a4b327e58e5b2ad1a33a0f4ec6d922241c30dab115ad015970a456c9a6
+[root@node-2 centosdebian]# docker ps -a
+CONTAINER ID   IMAGE     COMMAND       CREATED         STATUS         PORTS     NAMES
+d16563a4b327   centos    "/bin/bash"   6 seconds ago   Up 4 seconds             test
+
+```
+- Запустите второй контейнер из образа ***debian*** в фоновом режиме, подключив папку ```/data``` из текущей рабочей директории на хостовой машине в ```/data``` контейнера;
+```
+docker run --name debiantest -it -d -v /home/docker/centosdebian/data:/tmp debian
+b5aeef9fb044e4ff032a7a263737c5602e84f15f82ef947c1712352857356642
+[root@node-2 data]# docker ps -a
+CONTAINER ID   IMAGE     COMMAND       CREATED          STATUS         PORTS     NAMES
+b5aeef9fb044   debian    "bash"        11 seconds ago   Up 9 seconds             debiantest
+d16563a4b327   centos    "/bin/bash"   2 minutes ago    Up 2 minutes             test
+```
+- Подключитесь к первому контейнеру с помощью ```docker exec``` и создайте текстовый файл любого содержания в ```/data```;
+
+```
+[root@node-2 data]# docker exec -it d16563a4b327 bash
+[root@d16563a4b327 /]# cd /tmp/
+[root@d16563a4b327 tmp]# ls / > output.txt
+[root@d16563a4b327 tmp]# ls -l
+total 4
+-rw-r--r--. 1 root root 91 May  5 13:09 output.txt
+```
+
+- Добавьте еще один файл в папку ```/data``` на хостовой машине;
+```
+[root@node-2 data]# ls -l /root/ > outputhost.txt
+```
+- Подключитесь во второй контейнер и отобразите листинг и содержание файлов в ```/data``` контейнера.
+  
+```
+[root@node-2 data]# docker exec -it b5aeef9fb044 bash
+root@b5aeef9fb044:/# cd tmp/
+root@b5aeef9fb044:/tmp# ls -ltr
+total 8
+-rw-r--r--. 1 root root   91 May  5 13:09 output.txt
+-rw-r--r--. 1 root root 1415 May  5 13:10 outputhost.txt
+```
+
+## Задача 4 (*)
+
+Воспроизвести практическую часть лекции самостоятельно.
+
+Соберите Docker образ с Ansible, загрузите на Docker Hub и пришлите ссылку вместе с остальными ответами к задачам.
+
+
+---
+
+### Как cдавать задание
+
+Выполненное домашнее задание пришлите ссылкой на .md-файл в вашем репозитории.
+
+---
