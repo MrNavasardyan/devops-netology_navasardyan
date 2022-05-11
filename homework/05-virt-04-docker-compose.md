@@ -37,9 +37,11 @@
 
 Для получения зачета, вам необходимо предоставить:
 - Скриншот работающего веб-интерфейса Grafana с текущими метриками, как на примере ниже
-<p align="center">
-  <img width="1200" height="600" src="./assets/yc_02.png">
-</p>
+- 
+![](img/05-virt-04-docker-compose_3.PNG)
+
+
+![](img/05-virt-04-docker-compose_4.PNG)
 
 ## Задача 4 (*)
 
