@@ -362,6 +362,11 @@ total 8
 
 bash-5.1# sudo -u postgres psql < db_backup_25-05-2022
 
+bash-5.1# psql -Upostgres test_db
+psql (12.11)
+Type "help" for help.
+
+test_db=# \dt
 
 test_db=# \dt
           List of relations
