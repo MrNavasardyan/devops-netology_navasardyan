@@ -340,7 +340,7 @@ CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS  
 aa2617223ae5   b76727572d69   "docker-entrypoint.s…"   22 seconds ago   Up 20 seconds   0.0.0.0:5432->5432/tcp, :::5432->5432/tcp   sleepy_mendel
 
 Проверка что БД пустая
-[root@node-2 postgres]# docker exec -it d094237ed7f4 bash
+[root@node-2 postgres]# docker exec -it aa2617223ae5 bash
 bash-5.1# psql -Upostgres
 psql (12.11)
 Type "help" for help.
