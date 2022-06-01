@@ -282,14 +282,14 @@ test_db=# EXPLAIN (FORMAT YAML) SELECT * FROM clients WHERE order_number IS NOT 
                 QUERY PLAN
 ------------------------------------------
  - Plan:                                 +
-     Node Type: "Seq Scan"               +
-     Parallel Aware: false               +
-     Relation Name: "clients"            +
-     Alias: "clients"                    +
-     Startup Cost: 0.00                  +
-     Total Cost: 13.50                   +
-     Plan Rows: 348                      +
-     Plan Width: 204                     +
+     Node Type: "Seq Scan"               + -- Тип узла Seq Scan
+     Parallel Aware: false               + -- 
+     Relation Name: "clients"            + --
+     Alias: "clients"                    + --
+     Startup Cost: 0.00                  + -- Приблизительная стоимость запуска
+     Total Cost: 13.50                   + -- Приблизительная общая стоимость.
+     Plan Rows: 348                      + -- Ожидаемое число строк, которое должен вывести этот узел плана
+     Plan Width: 204                     + -- Ожидаемый средний размер строк, выводимых этим узлом плана (в байтах).
      Filter: "(order_number IS NOT NULL)"
 (1 row)
 
