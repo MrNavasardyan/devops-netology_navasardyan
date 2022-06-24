@@ -54,6 +54,7 @@ https://hub.docker.com/repository/docker/ngrachik/elastic
 ```
   
 - ответ `elasticsearch` на запрос пути `/` в json виде
+
 ```
 [root@node-2 ~]# curl http://localhost:9200/?format=json
 {
@@ -94,12 +95,71 @@ https://hub.docker.com/repository/docker/ngrachik/elastic
 | ind-3 | 2 | 4 |
 
 Получите список индексов и их статусов, используя API и **приведите в ответе** на задание.
-
+```
+[root@node-2 ~]# curl -X PUT https://localhost:9200/ind-1?pretty -H 'Content-Type: application/json' -d'{ "settings": { "index": { "number_of_shards": 1, "number_of_replicas": 0 }}}'
+curl: (35) error:1408F10B:SSL routines:ssl3_get_record:wrong version number
+[root@node-2 ~]# curl -X PUT http://localhost:9200/ind-1?pretty -H 'Content-Type: application/json' -d'{ "settings": { "index": { "number_of_shards": 1, "number_of_replicas": 0 }}}'
+{
+  "acknowledged" : true,
+  "shards_acknowledged" : true,
+  "index" : "ind-1"
+}
+[root@node-2 ~]# curl -X PUT http://localhost:9200/ind-2?pretty -H 'Content-Type: application/json' -d'{ "settings": { "index": { "number_of_shards": 2, "number_of_replicas": 1 }}}'
+{
+  "acknowledged" : true,
+  "shards_acknowledged" : true,
+  "index" : "ind-2"
+}
+[root@node-2 ~]# curl -X PUT http://localhost:9200/ind-3?pretty -H 'Content-Type: application/json' -d'{ "settings": { "index": { "number_of_shards": 4, "number_of_replicas": 2 }}}'
+{
+  "acknowledged" : true,
+  "shards_acknowledged" : true,
+  "index" : "ind-3"
+}
+```
 Получите состояние кластера `elasticsearch`, используя API.
+```
+[root@node-2 ~]# curl http://localhost:9200/_cluster/health?pretty
+{
+  "cluster_name" : "elasticsearch",
+  "status" : "yellow",
+  "timed_out" : false,
+  "number_of_nodes" : 1,
+  "number_of_data_nodes" : 1,
+  "active_primary_shards" : 10,
+  "active_shards" : 10,
+  "relocating_shards" : 0,
+  "initializing_shards" : 0,
+  "unassigned_shards" : 10,
+  "delayed_unassigned_shards" : 0,
+  "number_of_pending_tasks" : 0,
+  "number_of_in_flight_fetch" : 0,
+  "task_max_waiting_in_queue_millis" : 0,
+  "active_shards_percent_as_number" : 50.0
+}
+```
 
 Как вы думаете, почему часть индексов и кластер находится в состоянии yellow?
+```
+Из за того что у нас развернут одиночный сервер
+ElasticSearch является отказоустойчивой системой хранения данных, которая расчитана для запуска не на одном сервере, а на группе (кластере) из нескольких связанных серверов (узлов, “nodes”).
+```
 
 Удалите все индексы.
+```
+[root@node-2 ~]# curl -X DELETE http://localhost:9200/ind-1?pretty
+{
+  "acknowledged" : true
+}
+[root@node-2 ~]# curl -X DELETE http://localhost:9200/ind-2?pretty
+{
+  "acknowledged" : true
+}
+[root@node-2 ~]# curl -X DELETE http://localhost:9200/ind-3?pretty
+{
+  "acknowledged" : true
+}
+```
 
 **Важно**
 
