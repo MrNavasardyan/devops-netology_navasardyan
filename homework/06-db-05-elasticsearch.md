@@ -96,8 +96,6 @@ https://hub.docker.com/repository/docker/ngrachik/elastic
 
 Получите список индексов и их статусов, используя API и **приведите в ответе** на задание.
 ```
-[root@node-2 ~]# curl -X PUT https://localhost:9200/ind-1?pretty -H 'Content-Type: application/json' -d'{ "settings": { "index": { "number_of_shards": 1, "number_of_replicas": 0 }}}'
-curl: (35) error:1408F10B:SSL routines:ssl3_get_record:wrong version number
 [root@node-2 ~]# curl -X PUT http://localhost:9200/ind-1?pretty -H 'Content-Type: application/json' -d'{ "settings": { "index": { "number_of_shards": 1, "number_of_replicas": 0 }}}'
 {
   "acknowledged" : true,
@@ -173,25 +171,100 @@ ElasticSearch является отказоустойчивой системой
 - восстанавливать индексы из бэкапов
 
 Создайте директорию `{путь до корневой директории с elasticsearch в образе}/snapshots`.
+```
+В конфиг elasticsearch.yml был добавлен путь:
+path.repo: /usr/share/elasticsearch/snapshots
+```
 
 Используя API [зарегистрируйте](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-register-repository.html#snapshots-register-repository) 
 данную директорию как `snapshot repository` c именем `netology_backup`.
 
 **Приведите в ответе** запрос API и результат вызова API для создания репозитория.
+```
+[root@node-2 ~]# curl -X PUT http://localhost:9200/_snapshot/netology_backup?pretty -H 'Content-Type: application/json' -d' { "type": "fs", "settings": { "location": "/usr/share/elasticsearch/snapshots"}}'
+{
+  "acknowledged" : true
+}
+
+```
 
 Создайте индекс `test` с 0 реплик и 1 шардом и **приведите в ответе** список индексов.
+```
+[root@node-2 ~]# curl -X PUT http://localhost:9200/test_1?pretty -H 'Content-Type: application/json' -d'{ "settings": { "index": { "number_of_shards": 1, "number_of_replicas": 0 }}}'
+{
+  "acknowledged" : true,
+  "shards_acknowledged" : true,
+  "index" : "test_1"
+}
+[root@node-2 ~]# curl http://localhost:9200/_cat/indices?v
+health status index            uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+green  open   .geoip_databases 9bPLuXoCQ1CwyDrNX0IRwg   1   0         40            0       38mb           38mb
+green  open   test_1           SUPgO0RWR9Cd16jA6hxYCQ   1   0          0            0       226b           226b
+```
+
 
 [Создайте `snapshot`](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-take-snapshot.html) 
 состояния кластера `elasticsearch`.
 
 **Приведите в ответе** список файлов в директории со `snapshot`ами.
+```
+[elasticsearch@e8e77d336749 ~]$ ls -la /usr/share/elasticsearch/snapshots
+total 0
+drwxr-xr-x. 2 elasticsearch elasticsearch  6 Jun 26 18:57 .
+drwx------. 1 elasticsearch elasticsearch 63 Jun 26 18:50 ..
+
+[root@node-2 ~]# curl -X PUT http://localhost:9200/_snapshot/netology_backup/%3Cmy_snapshot_%7Bnow%2Fd%7D%3E
+{"accepted":true}
+
+Директория после создания:
+
+[elasticsearch@dc96a362e1ae ~]$ ls -lah /usr/share/elasticsearch/snapshots/
+total 44K
+drwxr-xr-x. 3 elasticsearch elasticsearch  134 Jun 26 20:01 .
+drwx------. 1 elasticsearch elasticsearch   63 Jun 26 19:44 ..
+-rw-r--r--. 1 elasticsearch elasticsearch 1.2K Jun 26 20:01 index-0
+-rw-r--r--. 1 elasticsearch elasticsearch    8 Jun 26 20:01 index.latest
+drwxr-xr-x. 5 elasticsearch elasticsearch   96 Jun 26 20:01 indices
+-rw-r--r--. 1 elasticsearch elasticsearch  29K Jun 26 20:01 meta-t3rso32qRZ-mbpsHqyzqCw.dat
+-rw-r--r--. 1 elasticsearch elasticsearch  638 Jun 26 20:01 snap-t3rso32qRZ-mbpsHqyzqCw.dat
+
+```
 
 Удалите индекс `test` и создайте индекс `test-2`. **Приведите в ответе** список индексов.
+
+```
+[root@node-2 ~]# curl -X DELETE http://localhost:9200/test_1?pretty
+{
+  "acknowledged" : true
+}
+
+[root@node-2 ~]# curl -X PUT http://localhost:9200/test_2?pretty -H 'Content-Type: application/json' -d'{ "settings": { "index": { "number_of_shards": 1, "number_of_replicas": 0 }}}'
+{
+  "acknowledged" : true,
+  "shards_acknowledged" : true,
+  "index" : "test_2"
+}
+
+[root@node-2 ~]# curl http://localhost:9200/_cat/indices?v
+health status index            uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+green  open   test_2           tfySDRKZQQeU-Iw18F13XQ   1   0          0            0       226b           226b
+
+```
 
 [Восстановите](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-restore-snapshot.html) состояние
 кластера `elasticsearch` из `snapshot`, созданного ранее. 
 
 **Приведите в ответе** запрос к API восстановления и итоговый список индексов.
+
+```
+[root@node-2 ~]# curl -X POST http://localhost:9200/_snapshot/netology_backup/my_snapshot_2022.06.26/_restore?pretty
+
+
+[root@node-2 ~]# curl http://localhost:9200/_cat/indices?v
+health status index            uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+green  open   test_2           tfySDRKZQQeU-Iw18F13XQ   1   0          0            0       226b           226b
+green  open   test_1           SUPgO0RWR9Cd16jA6hxYCQ   1   0          0            0       226b           226b
+```
 
 Подсказки:
 - возможно вам понадобится доработать `elasticsearch.yml` в части директивы `path.repo` и перезапустить `elasticsearch`
