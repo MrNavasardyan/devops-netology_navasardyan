@@ -444,7 +444,7 @@ Changes to Outputs:
 ---
 
 ```
-!!!!!!!!!!!!Просьба разъяснить по заданию, почему при terraform apply получаю ошибку:
+!!!!!!!!!!!!Просьба разъяснить по заданию, почему при terraform apply получаю ошибки:
 
 yandex_vpc_network.network-1: Creating...
 yandex_iam_service_account.gn: Creating...
