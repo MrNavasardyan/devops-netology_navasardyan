@@ -441,7 +441,7 @@ Changes to Outputs:
   + secret_key                  = (sensitive value)
 
 ```
-![](img/tr_workspace.PNG)
+![](https://github.com/MrNavasardyan/devops-netology_navasardyan/blob/main/homework/img/tr_workspace.PNG)
 ---
 
 ```
