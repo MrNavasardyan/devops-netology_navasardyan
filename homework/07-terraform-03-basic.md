@@ -441,6 +441,7 @@ Changes to Outputs:
   + secret_key                  = (sensitive value)
 
 ```
+![](img/tr_workspace.PNG)
 ---
 
 ```
