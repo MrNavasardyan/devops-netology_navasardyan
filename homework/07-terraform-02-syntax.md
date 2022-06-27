@@ -64,7 +64,7 @@ AWS предоставляет достаточно много бесплатн�
        * Идентификатор подсети в которой создан инстанс.  
 7. Если вы выполнили первый пункт, то добейтесь того, что бы команда `terraform plan` выполнялась без ошибок. 
 ```
-[root@node-2 terraform]# terraform plan
+[root@node-2 terraform_new]# terraform plan
 
 Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
   + create
@@ -80,7 +80,7 @@ Terraform will perform the following actions:
       + id                        = (known after apply)
       + metadata                  = {
           + "ssh-keys" = <<-EOT
-                ubuntu:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC4jG916sng1R9lP3RlHVm3NrLq/xbVtOpZIINZjpiu1HysO4eHozhjOBMX1r4F+NobVeMWWNlw3rN6I2HuBGFQJBabAx3STmx/c6PiZFc5AY7zURuCcl/4lHS5I3/mphrxPmVmQ/qf+kYVBo27ZpcDAZBofka4SfbovYgx59e0jOLN6/bMhAjkXj0vw46Y3qcaNBu+RZhTF/Dbx4T8efVUxnb+f/wM6/SEoVo9AlDtJ3Mn9Rq6QylbgCWoKvtqPt+Hjz+IAWqDP8FBwQEcTdBut97+uA/e6JGzaiMz1yfbiXrPadlUr8azQI6YAhx9JA5rvtxjTxnTMgKEqH5dwv+hUHwdN5Xhw61VD7t2JagvkWn5rW1Tn82XfMdWnu+ZjGFXEywLmkabWVF6/mahOZHgT5RAEtnzLUDVZpCSczRsO+m5OiH2HvNdmS51lUY3Ur7hkWcaag3qUBxY1Q8vexVQ/+ufdRaN0RRKFdAwZpc3gUvG0CJIXGOVtmUvpnIo45W4/IBkS5MKg6Aqcv0h/sVVlaUWeW8jQCmyszbGJr0cAA+6Fd1KLSj5YAOQM9XG9FH9Vrjl6Ti3DYR5szGSsfWMx31Z6TwP5CNQSxeknv02pSScRWTxHl8tJ5Sioxx89qD4DIsaHiBM3XLrbzZuqWia6XsGhWl4m27U5CwCYCZsLQ== ngrachik2011@gmail.com
+                centos:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC4jG916sng1R9lP3RlHVm3NrLq/xbVtOpZIINZjpiu1HysO4eHozhjOBMX1r4F+NobVeMWWNlw3rN6I2HuBGFQJBabAx3STmx/c6PiZFc5AY7zURuCcl/4lHS5I3/mphrxPmVmQ/qf+kYVBo27ZpcDAZBofka4SfbovYgx59e0jOLN6/bMhAjkXj0vw46Y3qcaNBu+RZhTF/Dbx4T8efVUxnb+f/wM6/SEoVo9AlDtJ3Mn9Rq6QylbgCWoKvtqPt+Hjz+IAWqDP8FBwQEcTdBut97+uA/e6JGzaiMz1yfbiXrPadlUr8azQI6YAhx9JA5rvtxjTxnTMgKEqH5dwv+hUHwdN5Xhw61VD7t2JagvkWn5rW1Tn82XfMdWnu+ZjGFXEywLmkabWVF6/mahOZHgT5RAEtnzLUDVZpCSczRsO+m5OiH2HvNdmS51lUY3Ur7hkWcaag3qUBxY1Q8vexVQ/+ufdRaN0RRKFdAwZpc3gUvG0CJIXGOVtmUvpnIo45W4/IBkS5MKg6Aqcv0h/sVVlaUWeW8jQCmyszbGJr0cAA+6Fd1KLSj5YAOQM9XG9FH9Vrjl6Ti3DYR5szGSsfWMx31Z6TwP5CNQSxeknv02pSScRWTxHl8tJ5Sioxx89qD4DIsaHiBM3XLrbzZuqWia6XsGhWl4m27U5CwCYCZsLQ== ngrachik2011@gmail.com
             EOT
         }
       + name                      = "terraform1"
@@ -99,7 +99,7 @@ Terraform will perform the following actions:
           + initialize_params {
               + block_size  = (known after apply)
               + description = (known after apply)
-              + image_id    = "fd87va5cc00gaq2f5qfb"
+              + image_id    = "fd86ca997krgb6vcroqm"
               + name        = (known after apply)
               + size        = (known after apply)
               + snapshot_id = (known after apply)
@@ -137,72 +137,6 @@ Terraform will perform the following actions:
         }
     }
 
-  # yandex_compute_instance.vm-2 will be created
-  + resource "yandex_compute_instance" "vm-2" {
-      + created_at                = (known after apply)
-      + folder_id                 = (known after apply)
-      + fqdn                      = (known after apply)
-      + hostname                  = (known after apply)
-      + id                        = (known after apply)
-      + metadata                  = {
-          + "ssh-keys" = <<-EOT
-                ubuntu:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC4jG916sng1R9lP3RlHVm3NrLq/xbVtOpZIINZjpiu1HysO4eHozhjOBMX1r4F+NobVeMWWNlw3rN6I2HuBGFQJBabAx3STmx/c6PiZFc5AY7zURuCcl/4lHS5I3/mphrxPmVmQ/qf+kYVBo27ZpcDAZBofka4SfbovYgx59e0jOLN6/bMhAjkXj0vw46Y3qcaNBu+RZhTF/Dbx4T8efVUxnb+f/wM6/SEoVo9AlDtJ3Mn9Rq6QylbgCWoKvtqPt+Hjz+IAWqDP8FBwQEcTdBut97+uA/e6JGzaiMz1yfbiXrPadlUr8azQI6YAhx9JA5rvtxjTxnTMgKEqH5dwv+hUHwdN5Xhw61VD7t2JagvkWn5rW1Tn82XfMdWnu+ZjGFXEywLmkabWVF6/mahOZHgT5RAEtnzLUDVZpCSczRsO+m5OiH2HvNdmS51lUY3Ur7hkWcaag3qUBxY1Q8vexVQ/+ufdRaN0RRKFdAwZpc3gUvG0CJIXGOVtmUvpnIo45W4/IBkS5MKg6Aqcv0h/sVVlaUWeW8jQCmyszbGJr0cAA+6Fd1KLSj5YAOQM9XG9FH9Vrjl6Ti3DYR5szGSsfWMx31Z6TwP5CNQSxeknv02pSScRWTxHl8tJ5Sioxx89qD4DIsaHiBM3XLrbzZuqWia6XsGhWl4m27U5CwCYCZsLQ== ngrachik2011@gmail.com
-            EOT
-        }
-      + name                      = "terraform2"
-      + network_acceleration_type = "standard"
-      + platform_id               = "standard-v1"
-      + service_account_id        = (known after apply)
-      + status                    = (known after apply)
-      + zone                      = (known after apply)
-
-      + boot_disk {
-          + auto_delete = true
-          + device_name = (known after apply)
-          + disk_id     = (known after apply)
-          + mode        = (known after apply)
-
-          + initialize_params {
-              + block_size  = (known after apply)
-              + description = (known after apply)
-              + image_id    = "fd87va5cc00gaq2f5qfb"
-              + name        = (known after apply)
-              + size        = (known after apply)
-              + snapshot_id = (known after apply)
-              + type        = "network-hdd"
-            }
-        }
-
-      + network_interface {
-          + index              = (known after apply)
-          + ip_address         = (known after apply)
-          + ipv4               = true
-          + ipv6               = (known after apply)
-          + ipv6_address       = (known after apply)
-          + mac_address        = (known after apply)
-          + nat                = true
-          + nat_ip_address     = (known after apply)
-          + nat_ip_version     = (known after apply)
-          + security_group_ids = (known after apply)
-          + subnet_id          = (known after apply)
-        }
-
-      + placement_policy {
-          + host_affinity_rules = (known after apply)
-          + placement_group_id  = (known after apply)
-        }
-
-      + resources {
-          + core_fraction = 100
-          + cores         = 4
-          + memory        = 4
-        }
-
-      + scheduling_policy {
-          + preemptible = (known after apply)
-        }
-    }
-
   # yandex_vpc_network.network-1 will be created
   + resource "yandex_vpc_network" "network-1" {
       + created_at                = (known after apply)
@@ -229,13 +163,12 @@ Terraform will perform the following actions:
       + zone           = "ru-central1-a"
     }
 
-Plan: 4 to add, 0 to change, 0 to destroy.
+Plan: 3 to add, 0 to change, 0 to destroy.
 
 Changes to Outputs:
   + external_ip_address_vm_1 = (known after apply)
-  + external_ip_address_vm_2 = (known after apply)
   + internal_ip_address_vm_1 = (known after apply)
-  + internal_ip_address_vm_2 = (known after apply)
+
 ```
 
 В качестве результата задания предоставьте:
