@@ -268,6 +268,8 @@ Changes to Outputs:
 ```
 ![](https://github.com/MrNavasardyan/devops-netology_navasardyan/blob/main/homework/img/tr_workspace.PNG)
 ---
+Ссылка на main.tf
+https://github.com/MrNavasardyan/devops-netology_navasardyan/blob/main/terraform/main.tf
 
 ```
 !!!!!!!!!!!!Доработка.C S3 возникли проблемы, не удается сконфигурировать, изменил конфиг, но разворачивает инстансы только в том workspace в котором находишься, корректно ли это?:
