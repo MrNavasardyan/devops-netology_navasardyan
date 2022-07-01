@@ -1,3 +1,4 @@
+#https://registry.terraform.io/providers/yandex-cloud/yandex/latest/docs/resources/vpc_network
 terraform {
   required_version = ">= 0.13"
 
